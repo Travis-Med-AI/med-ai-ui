@@ -1,0 +1,35 @@
+<div>
+  <form [formGroup]="modelForm"
+        *ngIf="images$ | async as images"
+        (ngSubmit)="submit()"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        class="register-form">
+    <mat-form-field>
+      <mat-label>Docker Image</mat-label>
+      <mat-select formControlName="image">
+        <mat-option *ngFor="let image of images" [value]="image">
+          {{image}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Input Type</mat-label>
+      <mat-select formControlName="input">
+        <mat-option *ngFor="let input of inputs" [value]="input">
+          {{input}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Output Type</mat-label>
+      <mat-select formControlName="output">
+        <mat-option *ngFor="let output of outputs" [value]="output">
+          {{output}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button type="submit" [disabled]="!modelForm.valid">Submit</button>
+  </form>
+</div>
+

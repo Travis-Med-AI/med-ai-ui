@@ -1,0 +1,28 @@
+<div fxLayoutAlign="center center" fxLayout="column">
+  <h1>Start New Model Evaluation</h1>
+  <div *ngIf="{studies: studies$ | async, models: models$ | async} as obs"
+       fxFill
+       fxLayoutAlign="center"
+       fxLayout="column">
+
+      <form
+        fxLayoutAlign="space-around"
+        *ngFor="let study of obs.studies"
+        #evalForm="ngForm"
+        (ngSubmit)="startEval(evalForm, study)">
+
+        <div>{{study}}</div>
+        <mat-form-field>
+          <mat-label>Model</mat-label>
+          <mat-select name="model" matNativeControl id="model" ngModel #model="ngModel" required>
+            <mat-option *ngFor="let model of obs.models" [value]="model.id">
+              {{model.image}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button type="submit" [disabled]="!evalForm.form.valid">Evaluate With Model</button>
+
+      </form>
+
+  </div>
+</div>
