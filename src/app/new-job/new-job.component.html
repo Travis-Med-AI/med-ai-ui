@@ -9,9 +9,9 @@
         fxLayoutAlign="space-around"
         *ngFor="let study of obs.studies"
         #evalForm="ngForm"
-        (ngSubmit)="startEval(evalForm, study)">
+        (ngSubmit)="startEval(evalForm, study.id)">
 
-        <div>{{study}}</div>
+        <div>{{study.orthancStudyId}}</div>
         <mat-form-field>
           <mat-label>Model</mat-label>
           <mat-select name="model" matNativeControl id="model" ngModel #model="ngModel" required>

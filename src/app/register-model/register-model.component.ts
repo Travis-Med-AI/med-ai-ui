@@ -17,7 +17,8 @@ export class RegisterModelComponent implements OnInit {
 
   outputs = [
     'Class_Probabilities',
-    'Mask'
+    'Mask',
+    'Study_Type'
   ]
 
   modelForm = this.fb.group({
