@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,9 @@ export class JobService {
 
   baseUrl = 'http://localhost:8000/ai'
 
-  getStudies(){
-    return this.http.get(`${this.baseUrl}/studies`)
+  getStudies(page: number, pageSize: number): Observable<{studies: any[], total: number}>{
+    return this.http.get<{studies: any[], total: number}>(`${this.baseUrl}/studies`,
+                         {params: {page:`${page}`, pageSize: `${pageSize}`}})
   }
 
   getModels() {
@@ -42,7 +44,8 @@ export class JobService {
     return this.http.post(`${this.baseUrl}/kill-job`, {id})
   }
 
-  getEvals() {
-    return this.http.get(`${this.baseUrl}/evals`)
+  getEvals(page: number, pageSize: number): Observable<{evals: any[], total: number}> {
+    return this.http.get<{evals: any[], total: number}>(`${this.baseUrl}/evals`,
+                                                        {params: {page:`${page}`, pageSize: `${pageSize}`}})
   }
 }

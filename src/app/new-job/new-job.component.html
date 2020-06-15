@@ -1,28 +1,38 @@
-<div fxLayoutAlign="center center" fxLayout="column">
+<div fxLayoutAlign="center center" fxLayout="column" *ngIf="models$ | async as models">
   <h1>Start New Model Evaluation</h1>
-  <div *ngIf="{studies: studies$ | async, models: models$ | async} as obs"
-       fxFill
-       fxLayoutAlign="center"
-       fxLayout="column">
 
-      <form
-        fxLayoutAlign="space-around"
-        *ngFor="let study of obs.studies"
-        #evalForm="ngForm"
-        (ngSubmit)="startEval(evalForm, study.id)">
+  <div class="mat-elevation-z8 start-eval-table">
+    <table mat-table [dataSource]="studies" class="start-eval-table">
+      <ng-container matColumnDef="study">
+        <th mat-header-cell *matHeaderCellDef> Study </th>
+        <td mat-cell *matCellDef="let element"> {{element.orthancStudyId}} </td>
+      </ng-container>
 
-        <div>{{study.orthancStudyId}}</div>
-        <mat-form-field>
-          <mat-label>Model</mat-label>
-          <mat-select name="model" matNativeControl id="model" ngModel #model="ngModel" required>
-            <mat-option *ngFor="let model of obs.models" [value]="model.id">
-              {{model.image}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-button type="submit" [disabled]="!evalForm.form.valid">Evaluate With Model</button>
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef> Model </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field>
+            <mat-label>Model</mat-label>
+            <mat-select [formControl]="modelControls[element.orthancStudyId]">
+              <mat-option *ngFor="let model of models" [value]="model.id">
+                {{model.image}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
 
-      </form>
+      <ng-container matColumnDef="submit">
+        <th mat-header-cell *matHeaderCellDef>Submit</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button type="submit" (click)="startEval(element)">Evaluate With Model</button>
+        </td>
+      </ng-container>
 
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="page($event)" [length]="totalStudies"></mat-paginator>
   </div>
 </div>

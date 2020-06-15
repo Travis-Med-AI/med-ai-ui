@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatTableModule } from '@angular/material/table'
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -26,6 +27,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { JobsComponent } from './jobs/jobs.component';
 import { EvalsComponent } from './evals/evals.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -57,7 +60,11 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     MatNativeDateModule,
     MatTableModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CdkTableModule,
+    CdkScrollableModule,
+    ScrollingModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
