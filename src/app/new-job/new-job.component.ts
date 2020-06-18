@@ -42,4 +42,8 @@ export class NewJobComponent implements OnInit {
     })
   }
 
+  filterModels(models, study) {
+    return models.filter(m => m.input === study.type)
+  }
+
 }

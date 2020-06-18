@@ -10,10 +10,7 @@ import { JobService } from '../job.service';
 export class RegisterModelComponent implements OnInit {
   images$ = this.jobService.getImages()
 
-  inputs = [
-    'dicom',
-    'png'
-  ]
+  inputs = ["Abd_Xray", "Frontal_CXR", "Lateral_CXR", "MSK_Xray", "DICOM"]
 
   outputs = [
     'Class_Probabilities',
