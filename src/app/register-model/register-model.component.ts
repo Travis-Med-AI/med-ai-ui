@@ -21,8 +21,10 @@ export class RegisterModelComponent implements OnInit {
   modelForm = this.fb.group({
     image: ['', Validators.required],
     input: ['', Validators.required],
-    output: ['', Validators.required]
+    output: ['', Validators.required],
+    imageOutput: [false, Validators.required],
   })
+
 
   constructor(private fb: FormBuilder, private jobService: JobService) { }
 
@@ -32,7 +34,8 @@ export class RegisterModelComponent implements OnInit {
   submit() {
     this.jobService.registerModel(this.modelForm.get('image').value,
                                   this.modelForm.get('input').value,
-                                  this.modelForm.get('output').value).subscribe(r => alert('registerd model'))
+                                  this.modelForm.get('output').value,
+                                  this.modelForm.get('imageOutput').value).subscribe(r => alert('registerd model'))
   }
 
 }

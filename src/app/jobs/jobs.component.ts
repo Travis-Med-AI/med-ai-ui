@@ -8,18 +8,25 @@ import { JobService } from '../job.service';
 })
 export class JobsComponent implements OnInit {
   jobs$ = this.jobService.getJobs();
-  displayedColumns = ['id', 'name', 'status', 'endDate', 'lastRun', 'killJob']
+  displayedColumns = ['name', 'lastRun', 'jobToggle']
 
   constructor(private jobService: JobService) { }
 
   ngOnInit(): void {
   }
 
-  killJob(id:number) {
-    this.jobService.killJob(id).subscribe(j => {
-      alert('successfuly killed job')
-      this.jobs$ = this.jobService.getJobs();
-    })
+  toggleJob(id:number, running:boolean) {
+    if (running) {
+      this.jobService.killJob(id).subscribe(j => {
+        this.jobs$ = this.jobService.getJobs();
+
+      })
+    } else {
+      this.jobService.startJob(id).subscribe(j => {
+        this.jobs$ = this.jobService.getJobs();
+      })
+    }
+
   }
 
 }

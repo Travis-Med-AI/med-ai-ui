@@ -13,14 +13,18 @@ export class NewJobComponent implements OnInit {
   studies = []
   modelControls: {[id: string]: FormControl} = {}
   models$ = this.jobService.getModels();
-  displayedColumns = ['study', 'model', 'submit']
+  displayedColumns = ['study', 'patientId', 'studyType', 'model', 'submit']
   totalStudies = 0;
+  searchControl = new FormControl('');
+  orthancStudyCount$ = this.jobService.countOrthancStudies();
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private jobService: JobService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.fetchStudies(0, 5);
+    this.searchControl.valueChanges.subscribe(s => this.fetchStudies(0,5))
   }
 
   startEval(study) {
@@ -33,7 +37,7 @@ export class NewJobComponent implements OnInit {
   }
 
   fetchStudies(pageIndex: number, pageSize: number) {
-    this.jobService.getStudies(pageIndex, pageSize).subscribe((studies: {studies: any[], total: number}) => {
+    this.jobService.getStudies(pageIndex, pageSize, this.searchControl.value).subscribe((studies: {studies: any[], total: number}) => {
       studies.studies.forEach(s => {
         this.modelControls[s.orthancStudyId] = new FormControl('');
       })

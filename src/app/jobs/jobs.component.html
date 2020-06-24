@@ -1,22 +1,7 @@
 <table mat-table *ngIf="jobs$ | async as jobs" [dataSource]="jobs" class="mat-elevation-z8 job-table">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> MODEL </th>
     <td mat-cell *matCellDef="let element"> {{element.model.image}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> STATUS </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="endDate">
-    <th mat-header-cell *matHeaderCellDef> END DATE </th>
-    <td mat-cell *matCellDef="let element"> {{element.endTime | date:'fullDate' || 'None'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="lastRun">
@@ -24,12 +9,11 @@
     <td mat-cell *matCellDef="let element"> {{element.lastRun | date:'medium'}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="killJob">
-    <th mat-header-cell *matHeaderCellDef> KILL JOB </th>
+  <ng-container matColumnDef="jobToggle">
+    <th mat-header-cell *matHeaderCellDef> JOB STATUS</th>
     <td mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="warn" aria-label="Kill this job" (click)="killJob(element.id)" *ngIf="element.status === 'RUNNING'">
-        <mat-icon>delete</mat-icon>
-      </button>
+      <mat-slide-toggle [checked]="element.running" (click)="toggleJob(element.id, element.running)">
+      </mat-slide-toggle>
     </td>
   </ng-container>
 

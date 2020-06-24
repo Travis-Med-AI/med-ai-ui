@@ -1,0 +1,23 @@
+<div>
+  <div>
+    <form [formGroup]="classifierForm"
+          *ngIf="images$ | async as images"
+          (ngSubmit)="submitClassifier()"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          class="register-form">
+      <h2>Classifier</h2>
+      <h3 *ngIf="classifier$ |async as classifier">Current: {{classifier}}</h3>
+      <mat-form-field>
+        <mat-label>Docker Image</mat-label>
+        <mat-select formControlName="image">
+          <mat-option *ngFor="let image of images" [value]="image">
+            {{image}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!classifierForm.valid">Submit</button>
+    </form>
+  </div>
+
+</div>
