@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { JobService } from '../job.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
+import { JobService } from '../services/job.service';
+import { EvalService } from '../services/eval.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-evals',
@@ -13,11 +15,19 @@ export class EvalsComponent implements OnInit {
   evals = []
   searchControl = new FormControl('');
 
-  displayedColumns = ['id', 'study', 'patient', 'result', 'model', 'status', 'lastUpdate', 'download']
+  displayedColumns = ['id', 
+                      'study', 
+                      'patient', 
+                      'result', 
+                      'model', 
+                      'status', 
+                      'lastUpdate', 
+                      'download', 
+                      'delete']
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor(private jobService: JobService) { }
+  constructor(private evalService: EvalService) { }
 
   ngOnInit(): void {
     this.fetchEvals(0,5);
@@ -30,14 +40,19 @@ export class EvalsComponent implements OnInit {
   }
 
   fetchEvals(pageIndex: number, pageSize:number) {
-    this.jobService.getEvals(pageIndex, pageSize, this.searchControl.value).subscribe(res => {
+    this.evalService.getEvals(pageIndex, pageSize, this.searchControl.value).subscribe(res => {
       this.totalEvals = res.total;
       this.evals = res.evals;
     })
   }
 
   getImage(id) {
-    this.jobService.getOutputImage(id);
+    this.evalService.getOutputImage(id);
+  }
+
+  deleteEval(evalId) {
+    this.evalService.deleteEval(evalId)
+    .subscribe( r => this.fetchEvals(this.paginator.pageIndex, this.paginator.pageSize))
   }
 
 }

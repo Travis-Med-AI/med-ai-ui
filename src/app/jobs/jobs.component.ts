@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobService } from '../job.service';
+import { JobService } from '../services/job.service';
 
 @Component({
   selector: 'app-jobs',
@@ -10,7 +10,7 @@ export class JobsComponent implements OnInit {
   jobs$ = this.jobService.getJobs();
   displayedColumns = ['name', 'lastRun', 'jobToggle']
 
-  constructor(private jobService: JobService) { }
+  constructor(private jobService:JobService) { }
 
   ngOnInit(): void {
   }

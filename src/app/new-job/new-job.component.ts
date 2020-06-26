@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { JobService } from '../job.service';
 import { NgForm, FormArray, FormBuilder, FormControl } from '@angular/forms'
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import { ModelService } from '../services/model.service';
+import { StudyService } from '../services/study.service';
+import { EvalService } from '../services/eval.service';
 
 @Component({
   selector: 'app-new-job',
@@ -12,15 +14,17 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 export class NewJobComponent implements OnInit {
   studies = []
   modelControls: {[id: string]: FormControl} = {}
-  models$ = this.jobService.getModels();
+  models$ = this.modelService.getModels();
   displayedColumns = ['study', 'patientId', 'studyType', 'model', 'submit']
   totalStudies = 0;
   searchControl = new FormControl('');
-  orthancStudyCount$ = this.jobService.countOrthancStudies();
+  orthancStudyCount$ = this.studyService.countOrthancStudies();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private jobService: JobService, private fb: FormBuilder) { }
+  constructor(private modelService: ModelService, 
+              private studyService: StudyService,
+              private evalService: EvalService) { }
 
   ngOnInit(): void {
     this.fetchStudies(0, 5);
@@ -29,7 +33,7 @@ export class NewJobComponent implements OnInit {
 
   startEval(study) {
     let model = this.modelControls[study.orthancStudyId].value;
-    this.jobService.evalDicom(model, study.id).subscribe(res => alert('successfully started'));
+    this.evalService.evalDicom(model, study.id).subscribe(res => alert('successfully started'));
   }
 
   page(pageEvent: PageEvent) {
@@ -37,7 +41,7 @@ export class NewJobComponent implements OnInit {
   }
 
   fetchStudies(pageIndex: number, pageSize: number) {
-    this.jobService.getStudies(pageIndex, pageSize, this.searchControl.value).subscribe((studies: {studies: any[], total: number}) => {
+    this.studyService.getStudies(pageIndex, pageSize, this.searchControl.value).subscribe((studies: {studies: any[], total: number}) => {
       studies.studies.forEach(s => {
         this.modelControls[s.orthancStudyId] = new FormControl('');
       })
