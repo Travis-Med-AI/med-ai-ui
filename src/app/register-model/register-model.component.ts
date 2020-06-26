@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { JobService } from '../job.service';
+import { ModelService } from '../services/model.service';
 
 @Component({
   selector: 'app-register-model',
@@ -8,7 +8,7 @@ import { JobService } from '../job.service';
   styleUrls: ['./register-model.component.scss']
 })
 export class RegisterModelComponent implements OnInit {
-  images$ = this.jobService.getImages()
+  images$ = this.modelService.getImages()
 
   inputs = ["Abd_Xray", "Frontal_CXR", "Lateral_CXR", "MSK_Xray", "DICOM"]
 
@@ -26,13 +26,13 @@ export class RegisterModelComponent implements OnInit {
   })
 
 
-  constructor(private fb: FormBuilder, private jobService: JobService) { }
+  constructor(private fb: FormBuilder, private modelService: ModelService) { }
 
   ngOnInit(): void {
   }
 
   submit() {
-    this.jobService.registerModel(this.modelForm.get('image').value,
+    this.modelService.registerModel(this.modelForm.get('image').value,
                                   this.modelForm.get('input').value,
                                   this.modelForm.get('output').value,
                                   this.modelForm.get('imageOutput').value).subscribe(r => alert('registerd model'))
