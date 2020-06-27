@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { JobService } from '../services/job.service';
 import { EvalService } from '../services/eval.service';
 import { switchMap } from 'rxjs/operators';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-evals',
@@ -27,7 +28,8 @@ export class EvalsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor(private evalService: EvalService) { }
+  constructor(private evalService: EvalService,
+              private notficiationService: NotificationService) { }
 
   ngOnInit(): void {
     this.fetchEvals(0,5);
@@ -52,7 +54,10 @@ export class EvalsComponent implements OnInit {
 
   deleteEval(evalId) {
     this.evalService.deleteEval(evalId)
-    .subscribe( r => this.fetchEvals(this.paginator.pageIndex, this.paginator.pageSize))
+    .subscribe( r => {
+      this.fetchEvals(this.paginator.pageIndex, this.paginator.pageSize)
+      this.notficiationService.showNotification('successfully deleted eval')
+    })
   }
 
 }

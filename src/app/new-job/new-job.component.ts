@@ -4,6 +4,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { ModelService } from '../services/model.service';
 import { StudyService } from '../services/study.service';
 import { EvalService } from '../services/eval.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-new-job',
@@ -24,7 +25,8 @@ export class NewJobComponent implements OnInit {
 
   constructor(private modelService: ModelService, 
               private studyService: StudyService,
-              private evalService: EvalService) { }
+              private evalService: EvalService,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.fetchStudies(0, 5);
@@ -33,7 +35,8 @@ export class NewJobComponent implements OnInit {
 
   startEval(study) {
     let model = this.modelControls[study.orthancStudyId].value;
-    this.evalService.evalDicom(model, study.id).subscribe(res => alert('successfully started'));
+    this.evalService.evalDicom(model, study.id)
+      .subscribe(res => this.notificationService.showNotification(`Sent request for evaluation of study ${study.id}`));
   }
 
   page(pageEvent: PageEvent) {

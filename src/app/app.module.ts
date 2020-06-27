@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -68,7 +69,8 @@ import { SettingsComponent } from './settings/settings.component';
     ScrollingModule,
     MatPaginatorModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
