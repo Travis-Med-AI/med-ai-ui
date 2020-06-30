@@ -18,10 +18,15 @@ export class RegisterModelComponent implements OnInit {
     'Study_Type'
   ]
 
+  inputTypes = ['DICOM', 'PNG']
+  modalities = ['CT', 'CR']
+
   modelForm = this.fb.group({
     image: ['', Validators.required],
     input: ['', Validators.required],
+    inputType: ['', Validators.required],
     output: ['', Validators.required],
+    modality: ['', Validators.required],
     imageOutput: [false, Validators.required],
   })
 
@@ -35,7 +40,8 @@ export class RegisterModelComponent implements OnInit {
     this.modelService.registerModel(this.modelForm.get('image').value,
                                   this.modelForm.get('input').value,
                                   this.modelForm.get('output').value,
-                                  this.modelForm.get('imageOutput').value).subscribe(r => alert('registerd model'))
+                                  this.modelForm.get('imageOutput').value,
+                                  this.modelForm.get('modality').value).subscribe(r => alert('registerd model'))
   }
 
 }

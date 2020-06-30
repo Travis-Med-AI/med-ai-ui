@@ -16,7 +16,7 @@ export class NewJobComponent implements OnInit {
   studies = []
   modelControls: {[id: string]: FormControl} = {}
   models$ = this.modelService.getModels();
-  displayedColumns = ['study', 'patientId', 'studyType', 'model', 'submit']
+  displayedColumns = ['study', 'patientId', 'studyType', 'modality', 'model', 'submit']
   totalStudies = 0;
   searchControl = new FormControl('');
   orthancStudyCount$ = this.studyService.countOrthancStudies();

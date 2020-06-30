@@ -18,6 +18,11 @@
         <td mat-cell *matCellDef="let element"> {{element.type}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="modality">
+        <th mat-header-cell *matHeaderCellDef> Modality</th>
+        <td mat-cell *matCellDef="let element"> {{element.modality}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="patientId">
         <th mat-header-cell *matHeaderCellDef> Patient Id</th>
         <td mat-cell *matCellDef="let element"> {{element.patientId}} </td>

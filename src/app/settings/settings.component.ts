@@ -9,10 +9,12 @@ import { ModelService } from '../services/model.service';
 })
 export class SettingsComponent implements OnInit {
   images$ = this.modelService.getImages()
-  classifier$ = this.modelService.getClassifier()
+  classifiers$ = this.modelService.getClassifiers()
 
+  modalities = ['CT', 'CR'];
   classifierForm = this.fb.group({
-    image: ['', Validators.required]
+    image: ['', Validators.required],
+    modality: ['', Validators.required]
   })
 
   constructor(private fb: FormBuilder, private modelService: ModelService) { }
@@ -22,6 +24,7 @@ export class SettingsComponent implements OnInit {
 
   submitClassifier () {
     let image = this.classifierForm.get('image').value
-    this.modelService.setClassifier(image).subscribe(r => alert(`Set ${image} as classifier`))
+    let modality = this.classifierForm.get('modality').value
+    this.modelService.setClassifier(image, modality).subscribe(r => alert(`Set ${image} as classifier`))
   }
 }

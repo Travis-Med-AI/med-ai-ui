@@ -20,16 +20,16 @@ export class ModelService {
     return this.http.get(`${this.baseUrl}/images`)
   }
 
-  registerModel(image: string, input: string, output: string, hasImageOutput: boolean) {
-    return this.http.post(`${this.baseUrl}/register`, { image, input, output, hasImageOutput })
+  registerModel(image: string, input: string, output: string, hasImageOutput: boolean, modality: string) {
+    return this.http.post(`${this.baseUrl}/register`, { image, input, output, hasImageOutput, modality })
   }
 
-  setClassifier(image: string) {
-    return this.http.post(`${this.baseUrl}/classifier`, {image})
+  setClassifier(image: string, modality: string) {
+    return this.http.post(`${this.baseUrl}/classifier`, {image, modality})
   }
 
-  getClassifier(): Observable<string> {
-    return this.http.get(`${this.baseUrl}/classifier`).pipe(map((c:any) => c.image))
+  getClassifiers(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/classifiers`)
   }
 
 }

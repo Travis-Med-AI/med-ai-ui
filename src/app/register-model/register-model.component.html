@@ -14,10 +14,26 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Input Type</mat-label>
+      <mat-label>Study Type</mat-label>
       <mat-select formControlName="input">
         <mat-option *ngFor="let input of inputs" [value]="input">
           {{input}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
+    <mat-form-field>
+      <mat-label>Input Type</mat-label>
+      <mat-select formControlName="inputType">
+        <mat-option *ngFor="let inputType of inputTypes" [value]="inputType">
+          {{inputType}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Modality</mat-label>
+      <mat-select formControlName="modality">
+        <mat-option *ngFor="let modality of modalities" [value]="modality">
+          {{modality}}
         </mat-option>
       </mat-select>
     </mat-form-field>
