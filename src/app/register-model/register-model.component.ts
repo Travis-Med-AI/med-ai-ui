@@ -10,7 +10,7 @@ import { ModelService } from '../services/model.service';
 export class RegisterModelComponent implements OnInit {
   images$ = this.modelService.getImages()
 
-  inputs = ["Abd_Xray", "Frontal_CXR", "Lateral_CXR", "MSK_Xray", "DICOM"]
+  inputs = ["Abd_Xray", "Frontal_CXR", "Lateral_CXR", "MSK_Xray", "DICOM", "CT"]
 
   outputs = [
     'Class_Probabilities',
