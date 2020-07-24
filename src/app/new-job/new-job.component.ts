@@ -23,14 +23,14 @@ export class NewJobComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private modelService: ModelService, 
+  constructor(private modelService: ModelService,
               private studyService: StudyService,
               private evalService: EvalService,
               private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.fetchStudies(0, 5);
-    this.searchControl.valueChanges.subscribe(s => this.fetchStudies(0,5))
+    this.fetchStudies(0, 10);
+    this.searchControl.valueChanges.subscribe(s => this.fetchStudies(0,10))
   }
 
   startEval(study) {

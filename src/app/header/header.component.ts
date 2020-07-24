@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from '../services/theme.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  isDark = false;
+  constructor(private themeService: ThemeService) {
+    themeService.isDark.subscribe(isDark => {
+      this.isDark = isDark
+      console.log(this.isDark)
+    }
+    )
+  }
 
   ngOnInit(): void {
   }
 
+  toggleDark(isDark: MatSlideToggleChange) {
+    this.themeService.setDark(isDark.checked);
+  }
 }

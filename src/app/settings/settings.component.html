@@ -6,7 +6,7 @@
           fxLayout="column"
           fxLayoutAlign="center center"
           class="register-form">
-      <h2>Classifier</h2>
+      <h2 class="mat-h2">Classifier</h2>
       <div *ngIf="classifiers$ | async as classifiers">
         <h3 *ngFor="let classifier of classifiers">Current {{classifier.modality}} Classifier: {{classifier.model.image}}</h3>
       </div>
@@ -28,6 +28,10 @@
       </mat-form-field>
       <button mat-button type="submit" [disabled]="!classifierForm.valid">Submit</button>
     </form>
+    <div fxLayoutAlign="center center" fxLayout="column">
+      <h2>App Theme</h2>
+      <mat-slide-toggle  [checked]="isDark" (change)="toggleDark($event)">Dark Theme
+      </mat-slide-toggle>
+    </div>
   </div>
-
 </div>

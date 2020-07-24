@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "med-ai-ui"
+  "defaultProject": "med-ai-ui",
+  "cli": {
+    "analytics": false
+  }
 }

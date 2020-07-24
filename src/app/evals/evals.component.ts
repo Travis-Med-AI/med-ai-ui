@@ -16,14 +16,14 @@ export class EvalsComponent implements OnInit {
   evals = []
   searchControl = new FormControl('');
 
-  displayedColumns = ['id', 
-                      'study', 
-                      'patient', 
-                      'result', 
-                      'model', 
-                      'status', 
-                      'lastUpdate', 
-                      'download', 
+  displayedColumns = ['id',
+                      'study',
+                      'patient',
+                      'result',
+                      'model',
+                      'status',
+                      'lastUpdate',
+                      'download',
                       'delete']
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -32,8 +32,8 @@ export class EvalsComponent implements OnInit {
               private notficiationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.fetchEvals(0,5);
-    this.searchControl.valueChanges.subscribe(s => this.fetchEvals(0,5))
+    this.fetchEvals(0,10);
+    this.searchControl.valueChanges.subscribe(s => this.fetchEvals(0,10))
 
   }
 

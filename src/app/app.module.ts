@@ -32,6 +32,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
 import { SettingsComponent } from './settings/settings.component';
+import { MonitorComponent } from './monitor/monitor.component';
 
 
 
@@ -45,7 +46,8 @@ import { SettingsComponent } from './settings/settings.component';
     JobsComponent,
     EvalsComponent,
     TruncatePipe,
-    SettingsComponent
+    SettingsComponent,
+    MonitorComponent
   ],
   imports: [
     BrowserModule,

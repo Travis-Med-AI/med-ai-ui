@@ -1,0 +1,21 @@
+<div fxLayoutAlign="center center" fxLayout="column">
+  <div fxLayoutGap='2rem' fxLayout="column">
+    <div *ngIf="gpuInfo">
+      <h2 >
+        GPU
+      </h2>
+      <div>Temp: {{gpuInfo.temp}}</div>
+      <div>Memory Usage: {{gpuInfo.usedMemory}}/{{gpuInfo.totalMemory}} MB</div>
+    </div>
+
+    <div *ngIf="cpuInfo">
+      <h2 >
+        CPU
+      </h2>
+      <div>Threads: {{cpuInfo.threads}}</div>
+      <div>Temp: {{cpuInfo.temp}}</div>
+      <div>Usage: {{cpuInfo.usage | number}}%</div>
+      <div>Memory Usage: {{cpuInfo.ram.used | number}}/{{cpuInfo.ram.total | number}} MB</div>
+    </div>
+  </div>
+</div>

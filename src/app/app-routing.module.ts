@@ -6,6 +6,7 @@ import { RegisterModelComponent } from './register-model/register-model.componen
 import { JobsComponent } from './jobs/jobs.component';
 import { EvalsComponent } from './evals/evals.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MonitorComponent } from './monitor/monitor.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'register-model', component: RegisterModelComponent },
   { path: 'jobs', component: JobsComponent },
   { path: 'evals', component: EvalsComponent },
+  { path: 'monitor', component: MonitorComponent },
   { path: 'settings', component: SettingsComponent },
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
   { path: '*', redirectTo: 'landing' },
