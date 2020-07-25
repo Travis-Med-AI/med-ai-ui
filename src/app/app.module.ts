@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { LandingComponent } from './landing/landing.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar'
@@ -14,12 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatTableModule } from '@angular/material/table'
-import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -39,7 +40,7 @@ import { MonitorComponent } from './monitor/monitor.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    SidenavComponent,
     LandingComponent,
     NewJobComponent,
     RegisterModelComponent,
@@ -72,7 +73,8 @@ import { MonitorComponent } from './monitor/monitor.component';
     MatPaginatorModule,
     MatSlideToggleModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

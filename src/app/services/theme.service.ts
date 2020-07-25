@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export enum THEMES {
+  LIGHT = 'Light',
+  DARK = 'Dark',
+  DARK_BLUE= 'Dark Blue'
+}
+
+export const THEMES_VALUES = {
+  [THEMES.LIGHT]: '',
+  [THEMES.DARK]: 'dark-theme',
+  [THEMES.DARK_BLUE]: 'dark-blue-theme'
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  localStorageKey = 'darkTheme';
+  localStorageKey = 'theme';
 
   constructor() { }
-  _isDark:boolean = JSON.parse(localStorage.getItem(this.localStorageKey))
+  _theme: THEMES = localStorage.getItem(this.localStorageKey) as THEMES
 
-  isDark = new BehaviorSubject(this._isDark)
-  setDark = (isDark) => {
-    this._isDark = isDark;
-    localStorage.setItem(this.localStorageKey, this._isDark.toString())
-    this.isDark.next(this._isDark)
+  theme = new BehaviorSubject(this._theme)
+  setTheme = (theme: THEMES) => {
+    this._theme = theme;
+    localStorage.setItem(this.localStorageKey, this._theme.toString())
+    this.theme.next(this._theme)
   }
 }

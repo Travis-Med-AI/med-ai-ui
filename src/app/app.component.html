@@ -1,7 +1,14 @@
-<div fxFill fxLayout="column" [ngClass]="{'dark-theme': isDark}" class="app-background mat-typography" >
-    <app-header fxFlex="7"></app-header>
+<mat-sidenav-container [ngClass]="theme" class="app-background mat-typography" fxFlexFill>
+  <mat-sidenav mode="side" opened color="primary">
+    <app-sidehav></app-sidehav>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill class="content">
+    <router-outlet ></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
+<!-- <div fxFill fxLayout="column" [ngClass]="{'dark-theme': isDark}" class="app-background mat-typography" >
   <div fxFlex="93" class="app-background">
     <router-outlet ></router-outlet>
   </div>
-</div>
+</div> -->

@@ -17,7 +17,6 @@ export class EvalsComponent implements OnInit {
   searchControl = new FormControl('');
 
   displayedColumns = ['id',
-                      'study',
                       'patient',
                       'result',
                       'model',

@@ -13,11 +13,6 @@
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="study">
-      <th mat-header-cell *matHeaderCellDef> STUDY </th>
-      <td mat-cell *matCellDef="let element"> {{element.study.orthancStudyId}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="patient">
       <th mat-header-cell *matHeaderCellDef> PATIENT ID </th>
       <td mat-cell *matCellDef="let element"> {{element.study.patientId}} </td>
@@ -44,16 +39,16 @@
     </ng-container>
 
     <ng-container matColumnDef="download">
-      <th mat-header-cell *matHeaderCellDef> Download Output </th>
+      <th mat-header-cell *matHeaderCellDef> Output </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button (click)="getImage(element.id)" [disabled]="!element.imgOutputPath">Download</button>
+        <button mat-button (click)="getImage(element.id)" [disabled]="!element.imgOutputPath"><mat-icon>cloud_download</mat-icon></button>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Delete </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button (click)="deleteEval(element.id)" color="warn">Delete</button>
+        <button mat-button (click)="deleteEval(element.id)" color="warn"><mat-icon>delete</mat-icon></button>
       </td>
     </ng-container>
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ThemeService } from './services/theme.service';
+import { ThemeService, THEMES, THEMES_VALUES } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,9 @@ import { ThemeService } from './services/theme.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isDark = false;
+  theme: string = THEMES_VALUES[THEMES.LIGHT];
   constructor(public themeService: ThemeService) {
-    this.themeService.isDark.subscribe(dark => this.isDark = dark)
+    this.themeService.theme.subscribe(theme => this.theme = THEMES_VALUES[theme])
   }
   title = 'med-ai-ui';
 }

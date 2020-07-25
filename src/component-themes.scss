@@ -1,0 +1,11 @@
+// import custom component themes
+// unofficial naming convention to support nice ordering of files in IDE
+// to see theme under the original style file of the componenent
+@import 'app/sidenav/sidenav.theme.scss';
+@import 'app/table.theme.scss';
+
+// you only have to add additional componenets here (instead of in every theme class)
+@mixin custom-components-theme($theme, $background) {
+  @include sidenav-component-theme($theme);
+  @include table-component-theme($theme, $background);
+}

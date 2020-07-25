@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ModelService } from '../services/model.service';
-import { ThemeService } from '../services/theme.service';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ThemeService, THEMES_VALUES, THEMES } from '../services/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +10,9 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 })
 export class SettingsComponent implements OnInit {
 
-  isDark = false;
+  currentTheme: THEMES;
+  themes: string[] = Object.values(THEMES);
+  themeControl = new FormControl('')
 
   images$ = this.modelService.getImages()
   classifiers$ = this.modelService.getClassifiers()
@@ -23,21 +24,22 @@ export class SettingsComponent implements OnInit {
   })
 
   constructor(private fb: FormBuilder, private modelService: ModelService, private themeService: ThemeService) {
-    themeService.isDark.subscribe(isDark => {
-      this.isDark = isDark
-    })
+    this.setupTheme()
    }
 
   ngOnInit(): void {
+  }
+
+  setupTheme() {
+    this.themeService.theme.subscribe(theme => {
+      this.currentTheme = theme
+    })
+    this.themeControl.valueChanges.subscribe(value => this.themeService.setTheme(value))
   }
 
   submitClassifier () {
     let image = this.classifierForm.get('image').value
     let modality = this.classifierForm.get('modality').value
     this.modelService.setClassifier(image, modality).subscribe(r => alert(`Set ${image} as classifier`))
-  }
-
-  toggleDark(isDark: MatSlideToggleChange) {
-    this.themeService.setDark(isDark.checked);
   }
 }
