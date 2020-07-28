@@ -1,22 +1,19 @@
-<table mat-table *ngIf="jobs$ | async as jobs" [dataSource]="jobs" class="mat-elevation-z8 job-table">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> MODEL </th>
-    <td mat-cell *matCellDef="let element"> {{element.model.image}} </td>
-  </ng-container>
 
-  <ng-container matColumnDef="lastRun">
-    <th mat-header-cell *matHeaderCellDef> LAST RUN </th>
-    <td mat-cell *matCellDef="let element"> {{element.lastRun | date:'medium'}} </td>
-  </ng-container>
+<div fxLayoutAlign="center center">
+  <button mat-icon-button (click)="addNew()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div *ngIf="jobs$ | async as jobs" fxLayoutGap="1rem" fxLayout="row wrap" class="job-container">
+  <mat-card *ngFor="let job of jobs"
+            class="job-card"
+            [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed }"
+            fxLayout="column">
 
-  <ng-container matColumnDef="jobToggle">
-    <th mat-header-cell *matHeaderCellDef> JOB STATUS</th>
-    <td mat-cell *matCellDef="let element">
-      <mat-slide-toggle [checked]="element.running" (click)="toggleJob(element.id, element.running)">
-      </mat-slide-toggle>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    {{job.model.displayName}}
+    <div>
+      <button mat-button>Info</button>
+      <button mat-button (click)="toggleJob(job.id, job.running)">Turn {{job.running? 'Off': 'On'}}</button>
+    </div>
+  </mat-card>
+</div>

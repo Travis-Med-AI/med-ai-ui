@@ -20,8 +20,8 @@ export class ModelService {
     return this.http.get(`${this.baseUrl}/images`)
   }
 
-  registerModel(image: string, input: string, output: string, hasImageOutput: boolean, modality: string) {
-    return this.http.post(`${this.baseUrl}/register`, { image, input, output, hasImageOutput, modality })
+  registerModel(manifestItem: any) {
+    return this.http.post(`${this.baseUrl}/register`, manifestItem)
   }
 
   setClassifier(image: string, modality: string) {
@@ -30,6 +30,10 @@ export class ModelService {
 
   getClassifiers(): Observable<any> {
     return this.http.get(`${this.baseUrl}/classifiers`)
+  }
+
+  getAvailableModels(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/available`)
   }
 
 }

@@ -21,6 +21,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCardModule } from '@angular/material/card';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -34,6 +38,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
 import { SettingsComponent } from './settings/settings.component';
 import { MonitorComponent } from './monitor/monitor.component';
+import { OrthancComponent } from './orthanc/orthanc.component';
+import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
 
 
 
@@ -48,7 +54,9 @@ import { MonitorComponent } from './monitor/monitor.component';
     EvalsComponent,
     TruncatePipe,
     SettingsComponent,
-    MonitorComponent
+    MonitorComponent,
+    OrthancComponent,
+    EvaluateStudyComponent
   ],
   imports: [
     BrowserModule,
@@ -75,8 +83,13 @@ import { MonitorComponent } from './monitor/monitor.component';
     MatCheckboxModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatCardModule,
+    MatStepperModule,
+    MatAutocompleteModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RegisterModelComponent]
 })
 export class AppModule { }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '../services/job.service';
 import { NotificationService } from '../services/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { VirtualTimeScheduler } from 'rxjs';
+import { RegisterModelComponent } from '../register-model/register-model.component';
 
 @Component({
   selector: 'app-jobs',
@@ -12,9 +15,15 @@ export class JobsComponent implements OnInit {
   displayedColumns = ['name', 'lastRun', 'jobToggle']
 
   constructor(private jobService:JobService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  addNew() {
+    this.dialog.open(RegisterModelComponent)
+    this.dialog.afterAllClosed.subscribe(_ => this.jobs$ = this.jobService.getJobs())
   }
 
   toggleJob(id:number, running:boolean) {

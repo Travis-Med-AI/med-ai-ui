@@ -34,8 +34,8 @@ $custom-typography: mat-typography-config(
 // CSS class whatever you want. In this example, any component inside of an element with
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
-  $dark-primary: mat-palette($mat-grey, 800, 700, 900);
-  $dark-accent:  mat-palette($mat-green, A200, A100, A400);
+  $dark-primary: mat-palette($mat-grey, 400, 100, 900);
+  $dark-accent:  mat-palette($mat-green, A500, A100, A700);
   $dark-theme:   mat-dark-theme( $dark-primary, $dark-accent, $dark-warn);
   $dark-backround: mat-color($dark-primary, darker);
 

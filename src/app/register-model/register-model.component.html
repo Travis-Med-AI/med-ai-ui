@@ -1,53 +1,8 @@
 <div>
-  <form [formGroup]="modelForm"
-        *ngIf="images$ | async as images"
-        (ngSubmit)="submit()"
-        fxLayout="column"
-        fxLayoutAlign="center center"
-        class="register-form">
-    <mat-form-field>
-      <mat-label>Docker Image</mat-label>
-      <mat-select formControlName="image">
-        <mat-option *ngFor="let image of images" [value]="image">
-          {{image}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Study Type</mat-label>
-      <mat-select formControlName="input">
-        <mat-option *ngFor="let input of inputs" [value]="input">
-          {{input}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field> 
-    <mat-form-field>
-      <mat-label>Input Type</mat-label>
-      <mat-select formControlName="inputType">
-        <mat-option *ngFor="let inputType of inputTypes" [value]="inputType">
-          {{inputType}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Modality</mat-label>
-      <mat-select formControlName="modality">
-        <mat-option *ngFor="let modality of modalities" [value]="modality">
-          {{modality}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Output Type</mat-label>
-      <mat-select formControlName="output">
-        <mat-option *ngFor="let output of outputs" [value]="output">
-          {{output}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-checkbox formControlName="imageOutput">Image Output</mat-checkbox>
-    <button mat-button type="submit" [disabled]="!modelForm.valid">Submit</button>
-  </form>
+  <mat-card *ngFor="let model of availableModels">
+    {{model.displayName}}
+    <button mat-button (click)="register(model)">Register</button>
+  </mat-card>
 </div>
 
 
