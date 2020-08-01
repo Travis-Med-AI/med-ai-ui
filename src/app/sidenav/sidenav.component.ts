@@ -18,7 +18,7 @@ export class SidenavComponent implements OnInit {
   sidenavItems: sideNavItem[] = [
     {icon: 'insert_drive_file', routerLink: 'new-job', displayValue: 'Studies'},
     {icon: 'model_training', routerLink: 'evaluate-study', displayValue: 'Evaluate Study'},
-    {icon: 'add_to_queue', routerLink: 'jobs', displayValue: 'Jobs'},
+    {icon: 'add_to_queue', routerLink: 'jobs', displayValue: 'Models'},
     {icon: 'leaderboard', routerLink: 'evals', displayValue: 'Evals'},
     {icon: 'memory', routerLink: 'monitor', displayValue: 'Monitor'},
     {icon: 'image', routerLink: 'orthanc', displayValue: 'Orthanc'},

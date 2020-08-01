@@ -4,16 +4,22 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<div *ngIf="jobs$ | async as jobs" fxLayoutGap="1rem" fxLayout="row wrap" class="job-container">
+<div *ngIf="jobs" fxLayout="row wrap" class="job-container">
   <mat-card *ngFor="let job of jobs"
             class="job-card"
             [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed }"
             fxLayout="column">
 
     {{job.model.displayName}}
-    <div>
+    <div *ngIf="job.model.pulled && !job.model.failed" fxLayoutAlign="center center">
       <button mat-button>Info</button>
       <button mat-button (click)="toggleJob(job.id, job.running)">Turn {{job.running? 'Off': 'On'}}</button>
+      <button mat-button (click)="setAsClassifier(job.model)">Use as {{job.model.modality}} classifier</button>
+    </div>
+    <div *ngIf="job.model.failed"> Download Failed </div>
+    <div *ngIf="!job.model.pulled && !job.model.failed"> Downloading...</div>
+    <div *ngIf="!job.model.pulled || job.model.failed"> 
+      <button mat-button (click)="retry(job.model.image)">Retry Download</button>   
     </div>
   </mat-card>
 </div>

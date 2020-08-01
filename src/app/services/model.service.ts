@@ -24,6 +24,10 @@ export class ModelService {
     return this.http.post(`${this.baseUrl}/register`, manifestItem)
   }
 
+  retryModel(image: any) {
+    return this.http.post(`${this.baseUrl}/retry`, {image})
+  }
+
   setClassifier(image: string, modality: string) {
     return this.http.post(`${this.baseUrl}/classifier`, {image, modality})
   }
