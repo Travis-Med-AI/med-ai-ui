@@ -12,6 +12,7 @@ import { NotificationService } from '../services/notification.service';
   styleUrls: ['./evals.component.scss']
 })
 export class EvalsComponent implements OnInit {
+  JSON = JSON
   totalEvals = 0;
   evals = []
   searchControl = new FormControl('');
@@ -19,6 +20,7 @@ export class EvalsComponent implements OnInit {
   displayedColumns = ['id',
                       'patient',
                       'result',
+                      // 'prob',
                       'model',
                       'status',
                       'lastUpdate',
