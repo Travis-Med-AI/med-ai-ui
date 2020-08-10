@@ -19,8 +19,8 @@ export class EvaluateStudyComponent implements OnInit {
   }
 
   fetchStudies(pageIndex: number, pageSize: number, searchString: string) {
-    this.studyService.getStudies(pageIndex, pageSize, this.studyControl.value).subscribe((res: {studies: any[], total: number}) => {
-      this.studies = res.studies;
+    this.studyService.getStudies(pageIndex, pageSize, this.studyControl.value).subscribe((res) => {
+      this.studies = res.payload;
     })
   }
 

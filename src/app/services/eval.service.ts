@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PagedResponse, StudyEvalVM } from 'med-ai-common';
 
 
 @Injectable({
@@ -13,13 +14,18 @@ export class EvalService {
   constructor(private http: HttpClient) { }
 
 
-  getEvals(page: number, pageSize: number, searchString: string): Observable<{evals: any[], total: number}> {
-    return this.http.get<{evals: any[], total: number}>(`${this.baseUrl}`,
-                                                        {params: {page:`${page}`, pageSize: `${pageSize}`, searchString}})
+  getEvals(page: number, pageSize: number, searchString: string): Observable<PagedResponse<StudyEvalVM>> {
+    let params = {
+      page:`${page}`, 
+      pageSize: `${pageSize}`, 
+      searchString
+     }
+    
+    return this.http.get<PagedResponse<StudyEvalVM>>(this.baseUrl, {params})
   }
 
-  evalDicom(modelId, studyId) {
-    return this.http.get(`${this.baseUrl}/${modelId}/${studyId}`)
+  evalDicom(modelId: number, studyId:number): Observable<{message: string}> {
+    return this.http.get<{message: string}>(`${this.baseUrl}/${modelId}/${studyId}`)
   }
 
   deleteEval(evalId:number) {

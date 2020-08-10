@@ -18,8 +18,8 @@
     </div>
     <div *ngIf="job.model.failed"> Download Failed </div>
     <div *ngIf="!job.model.pulled && !job.model.failed"> Downloading...</div>
-    <div *ngIf="!job.model.pulled || job.model.failed"> 
-      <button mat-button (click)="retry(job.model.image)">Retry Download</button>   
+    <div *ngIf="!job.model.pulled || job.model.failed">
+      <button mat-button (click)="retry(job.model.image)">Retry Download</button>
     </div>
   </mat-card>
 </div>

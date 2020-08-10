@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ModelViewModel, ModelManifestItem, ClassifierViewModel } from 'med-ai-common';
 
 
 @Injectable({
@@ -12,32 +13,32 @@ export class ModelService {
 
   constructor(private http: HttpClient) { }
 
-  getModels() {
-    return this.http.get(`${this.baseUrl}`)
+  getModels(): Observable<ModelViewModel[]> {
+    return this.http.get<ModelViewModel[]>(`${this.baseUrl}`)
   }
 
-  getImages() {
-    return this.http.get(`${this.baseUrl}/images`)
+  getImages(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/images`)
   }
 
-  registerModel(manifestItem: any) {
-    return this.http.post(`${this.baseUrl}/register`, manifestItem)
+  registerModel(manifestItem: ModelManifestItem): Observable<ModelViewModel> {
+    return this.http.post<ModelViewModel>(`${this.baseUrl}/register`, manifestItem)
   }
 
-  retryModel(image: any) {
-    return this.http.post(`${this.baseUrl}/retry`, {image})
+  retryModel(image: string): Observable<ModelViewModel> {
+    return this.http.post<ModelViewModel>(`${this.baseUrl}/retry`, {image})
   }
 
-  setClassifier(image: string, modality: string) {
-    return this.http.post(`${this.baseUrl}/classifier`, {image, modality})
+  setClassifier(image: string, modality: string): Observable<ModelViewModel> {
+    return this.http.post<ModelViewModel>(`${this.baseUrl}/classifier`, {image, modality})
   }
 
-  getClassifiers(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/classifiers`)
+  getClassifiers(): Observable<ClassifierViewModel[]> {
+    return this.http.get<ClassifierViewModel[]>(`${this.baseUrl}/classifiers`)
   }
 
-  getAvailableModels(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/available`)
+  getAvailableModels(): Observable<ModelManifestItem[]> {
+    return this.http.get<ModelManifestItem[]>(`${this.baseUrl}/available`)
   }
 
 }

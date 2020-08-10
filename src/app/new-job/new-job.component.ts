@@ -44,12 +44,12 @@ export class NewJobComponent implements OnInit {
   }
 
   fetchStudies(pageIndex: number, pageSize: number) {
-    this.studyService.getStudies(pageIndex, pageSize, this.searchControl.value).subscribe((studies: {studies: any[], total: number}) => {
-      studies.studies.forEach(s => {
+    this.studyService.getStudies(pageIndex, pageSize, this.searchControl.value).subscribe(studies => {
+      studies.payload.forEach(s => {
         this.modelControls[s.orthancStudyId] = new FormControl('');
       })
       this.totalStudies = studies.total;
-      this.studies = studies.studies;
+      this.studies = studies.payload;
     })
   }
 

@@ -45,7 +45,7 @@ export class EvalsComponent implements OnInit {
   fetchEvals(pageIndex: number, pageSize:number) {
     this.evalService.getEvals(pageIndex, pageSize, this.searchControl.value).subscribe(res => {
       this.totalEvals = res.total;
-      this.evals = res.evals;
+      this.evals = res.payload;
     })
   }
 

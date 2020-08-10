@@ -6,6 +6,7 @@ import { VirtualTimeScheduler, interval } from 'rxjs';
 import { RegisterModelComponent } from '../register-model/register-model.component';
 import { ModelService } from '../services/model.service';
 import { startWith, switchMap } from 'rxjs/operators';
+import { EvalJobViewModel } from 'med-ai-common';
 
 @Component({
   selector: 'app-jobs',
@@ -13,7 +14,7 @@ import { startWith, switchMap } from 'rxjs/operators';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-  jobs = []
+  jobs: EvalJobViewModel[] = []
   jobs$ = interval(5000).pipe(
     startWith(0),
     switchMap(() => this.jobService.getJobs())

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { PagedResponse, StudyViewModel } from 'med-ai-common';
 
 
 @Injectable({
@@ -12,12 +13,12 @@ export class StudyService {
 
   constructor(private http: HttpClient) { }
 
-  getStudies(page: number, pageSize: number, searchString: string): Observable<{studies: any[], total: number}>{
-    return this.http.get<{studies: any[], total: number}>(`${this.baseUrl}`,
+  getStudies(page: number, pageSize: number, searchString: string): Observable<PagedResponse<StudyViewModel>>{
+    return this.http.get<PagedResponse<StudyViewModel>>(`${this.baseUrl}`,
                          {params: {page:`${page}`, pageSize: `${pageSize}`, searchString}})
   }
 
   countOrthancStudies(): Observable<number> {
-    return this.http.get(`${this.baseUrl}/orthanc-count`).pipe(map((s:any) => s.count))
+    return this.http.get<{count: number}>(`${this.baseUrl}/orthanc-count`).pipe(map((s:any) => s.count))
   }
 }
