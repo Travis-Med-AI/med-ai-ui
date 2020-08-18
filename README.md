@@ -7,7 +7,7 @@
   Travis Med AI
 </h1>
 
-<h3 align="center">asfasfasdf
+<h3 align="center">
   Simplified AI in a clinical Setting
 </h3>
 <p align="center">
