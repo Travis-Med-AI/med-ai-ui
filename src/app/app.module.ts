@@ -40,8 +40,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { MonitorComponent } from './monitor/monitor.component';
 import { OrthancComponent } from './orthanc/orthanc.component';
 import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-
+const config: SocketIoConfig = { url: 'http://localhost:8000'}
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.componen
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
