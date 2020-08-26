@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -46,6 +48,27 @@ import { DeleteConfirmationComponent } from './jobs/delete-confirmation/delete-c
 
 const config: SocketIoConfig = { url: 'http://localhost:8000'}
 
+const materialModules = [
+  MatPaginatorModule,
+  MatSlideToggleModule,
+  MatCheckboxModule,
+  MatSnackBarModule,
+  MatSidenavModule,
+  MatCardModule,
+  MatStepperModule,
+  MatAutocompleteModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatTableModule,
+  MatIconModule,
+  MatTooltipModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatInputModule
+]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,32 +90,16 @@ const config: SocketIoConfig = { url: 'http://localhost:8000'}
     SocketIoModule.forRoot(config),
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
+    DeviceDetectorModule,
     HttpClientModule,
     FlexLayoutModule,
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTableModule,
-    MatIconModule,
-    MatTooltipModule,
     CdkTableModule,
     CdkScrollableModule,
     ScrollingModule,
-    MatPaginatorModule,
-    MatSlideToggleModule,
-    MatCheckboxModule,
-    MatSnackBarModule,
-    MatSidenavModule,
-    MatCardModule,
-    MatStepperModule,
-    MatAutocompleteModule,
-    MatDialogModule,
-    MatExpansionModule
+    ...materialModules
   ],
   providers: [],
   bootstrap: [AppComponent],

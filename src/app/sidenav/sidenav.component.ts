@@ -14,7 +14,7 @@ interface sideNavItem {
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-  collapsed = true;
+
   sidenavItems: sideNavItem[] = [
     {icon: 'insert_drive_file', routerLink: 'new-job', displayValue: 'Studies'},
     {icon: 'model_training', routerLink: 'evaluate-study', displayValue: 'Evaluate'},
@@ -29,9 +29,6 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
 
-  toggleCollapsed() {
-    this.collapsed = !this.collapsed
   }
 }

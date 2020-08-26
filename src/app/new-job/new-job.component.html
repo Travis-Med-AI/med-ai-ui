@@ -29,7 +29,7 @@
       </ng-container>
 
       <ng-container matColumnDef="model">
-        <th mat-header-cell *matHeaderCellDef> Model </th>
+        <th mat-header-cell *matHeaderCellDef > Model </th>
         <td mat-cell *matCellDef="let element">
           <mat-form-field>
             <mat-label>Model</mat-label>
@@ -43,9 +43,11 @@
       </ng-container>
 
       <ng-container matColumnDef="submit">
-        <th mat-header-cell *matHeaderCellDef>Submit</th>
+        <th mat-header-cell *matHeaderCellDef>Start</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button type="submit" (click)="startEval(element)">Evaluate With Model</button>
+          <button mat-button type="submit" (click)="startEval(element)">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
         </td>
       </ng-container>
 

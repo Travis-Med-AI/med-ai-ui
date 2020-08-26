@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
-import { JobService } from '../services/job.service';
 import { EvalService } from '../services/eval.service';
-import { switchMap } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { NotificationService } from '../services/notification.service';
 
 @Component({
@@ -16,26 +15,38 @@ export class EvalsComponent implements OnInit {
   totalEvals = 0;
   evals = []
   searchControl = new FormControl('');
+  displayedColumns = []
 
-  displayedColumns = ['id',
-                      'patient',
-                      'result',
-                      // 'prob',
-                      'model',
-                      'status',
-                      'lastUpdate',
-                      'download',
-                      'delete']
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
   constructor(private evalService: EvalService,
-              private notficiationService: NotificationService) { }
+              private notficiationService: NotificationService,
+              private deviceService: DeviceDetectorService) { }
 
   ngOnInit(): void {
     this.fetchEvals(0,10);
     this.searchControl.valueChanges.subscribe(s => this.fetchEvals(0,10))
+    this.setupColumns();
+  }
 
+  setupColumns() {
+    let mobileColumns = [
+      'patient',
+      'model',
+      'result',
+    ]
+    let extraColumns = [
+      'status',
+      'lastUpdate',
+      'download',
+      'delete'
+    ]
+    if(this.deviceService.isMobile()) {
+      this.displayedColumns = mobileColumns
+    } else {
+      this.displayedColumns = mobileColumns.concat(extraColumns)
+    }
   }
 
   page(pageEvent: PageEvent) {

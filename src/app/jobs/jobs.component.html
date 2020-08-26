@@ -4,7 +4,7 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<div *ngIf="jobs" fxLayout="row wrap" class="job-container">
+<div *ngIf="jobs" fxLayout="row wrap" class="job-container" fxLayoutAlign="center">
   <mat-card *ngFor="let job of jobs"
             class="job-card"
             [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed }"
