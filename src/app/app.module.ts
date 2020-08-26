@@ -41,6 +41,7 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { OrthancComponent } from './orthanc/orthanc.component';
 import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { DeleteConfirmationComponent } from './jobs/delete-confirmation/delete-confirmation.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8000'}
 
@@ -57,7 +58,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8000'}
     SettingsComponent,
     MonitorComponent,
     OrthancComponent,
-    EvaluateStudyComponent
+    EvaluateStudyComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     BrowserModule,

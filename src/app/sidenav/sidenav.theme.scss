@@ -1,8 +1,6 @@
 @import '~@angular/material/theming';
 @import '../default.theme.scss';
-@mixin sidenav-component-theme($theme) {
-
-
+@mixin sidenav-component-theme($theme, $default) {
   // retrieve variables from theme
   // (all possible variables, use only what you really need)
 
@@ -19,6 +17,9 @@
     color: mat-color($foreground, text);
 
     // now, mat-toolbar's colored themes
+    &[color=default]{
+      @include toolbar-color($default);
+    }
     &[color=primary]{
       @include toolbar-color($primary);
     }

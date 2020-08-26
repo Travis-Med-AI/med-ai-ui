@@ -5,7 +5,7 @@
 @import 'app/table.theme.scss';
 
 // you only have to add additional componenets here (instead of in every theme class)
-@mixin custom-components-theme($theme, $background) {
-  @include sidenav-component-theme($theme);
+@mixin custom-components-theme($theme, $background, $default) {
+  @include sidenav-component-theme($theme, $default);
   @include table-component-theme($theme, $background);
 }

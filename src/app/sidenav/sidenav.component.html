@@ -1,7 +1,7 @@
-<div class="banner">{{collapsed? 'AI': 'Med AI'}}</div>
-<div *ngFor="let item of sidenavItems" class="sidenav-item" [matTooltipDisabled]="!collapsed" [matTooltip]="item.displayValue">
+<div class="banner">AI</div>
+<div *ngFor="let item of sidenavItems" class="sidenav-item" [matTooltip]="item.displayValue">
   <div>
-    <button mat-button [routerLink]="item.routerLink" class="sidenav-item" [fxLayoutAlign]="collapsed? 'center': 'space-around'">
+    <button mat-button [routerLink]="item.routerLink" class="sidenav-item" fxLayoutAlign="center">
       <div><mat-icon>{{item.icon}}</mat-icon></div>
       <div>{{item.displayValue}}</div>
     </button>

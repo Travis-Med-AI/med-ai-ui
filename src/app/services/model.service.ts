@@ -41,4 +41,7 @@ export class ModelService {
     return this.http.get<ModelManifestItem[]>(`${this.baseUrl}/available`)
   }
 
+  deleteModel(modelId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${modelId}`)
+  }
 }

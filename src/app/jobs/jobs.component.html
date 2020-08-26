@@ -21,5 +21,8 @@
     <div *ngIf="!job.model.pulled || job.model.failed">
       <button mat-button (click)="retry(job.model.image)">Retry Download</button>
     </div>
+    <div>
+      <button mat-button (click)="deleteJob(job)">Delete Model</button>
+    </div>
   </mat-card>
 </div>

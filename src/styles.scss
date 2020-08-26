@@ -19,7 +19,7 @@ $light-theme: mat-light-theme( $light-primary, $light-accent, $light-warn);
 $light-background: mat-color($mat-light-theme-background, background);
 
 @include angular-material-theme($light-theme);
-@include custom-components-theme($light-theme, $light-background);
+@include custom-components-theme($light-theme, $light-background, mat-palette($mat-blue, 700));
 
 $dark-warn:    mat-palette($mat-deep-orange);
 
@@ -40,7 +40,7 @@ $custom-typography: mat-typography-config(
   $dark-backround: mat-color($dark-primary, darker);
 
     @include angular-material-theme($dark-theme);
-    @include custom-components-theme($dark-theme, $dark-backround);
+    @include custom-components-theme($dark-theme, $dark-backround, mat-palette($mat-grey, 800, A100, A700));
 
     &.app-background {
         background-color: mat-color($dark-primary, darker);
@@ -50,12 +50,12 @@ $custom-typography: mat-typography-config(
 
 .dark-blue-theme {
   $dark-primary: mat-palette($mat-blue-grey, 800, 700, 900);
-  $dark-accent:  mat-palette($mat-teal, A200, A100, A400);
+  $dark-accent:  mat-palette($mat-teal, 400, 100, 900);
   $dark-theme:   mat-dark-theme( $dark-primary, $dark-accent, $dark-warn);
   $dark-backround: mat-color($dark-primary, default);
 
   @include angular-material-theme($dark-theme);
-  @include custom-components-theme($dark-theme, $dark-backround);
+  @include custom-components-theme($dark-theme, $dark-backround, mat-palette($mat-blue-grey, 800));
 
   &.app-background {
       background-color: mat-color($dark-primary, darker);

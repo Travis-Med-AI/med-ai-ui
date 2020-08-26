@@ -1,14 +1,8 @@
 <mat-sidenav-container [ngClass]="theme" class="app-background mat-typography" fxFlexFill>
-  <mat-sidenav mode="side" opened color="accent">
+  <mat-sidenav mode="side" opened color="default">
     <app-sidehav></app-sidehav>
   </mat-sidenav>
   <mat-sidenav-content class="content">
     <router-outlet ></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <div fxFill fxLayout="column" [ngClass]="{'dark-theme': isDark}" class="app-background mat-typography" >
-  <div fxFlex="93" class="app-background">
-    <router-outlet ></router-outlet>
-  </div>
-</div> -->

@@ -7,6 +7,7 @@ import { RegisterModelComponent } from '../register-model/register-model.compone
 import { ModelService } from '../services/model.service';
 import { startWith, switchMap } from 'rxjs/operators';
 import { EvalJobViewModel } from 'med-ai-common';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-jobs',
@@ -47,7 +48,6 @@ export class JobsComponent implements OnInit {
         this.notificationService.showNotification('Successfully turned job on')
       })
     }
-
   }
 
   getJobs() {
@@ -66,6 +66,13 @@ export class JobsComponent implements OnInit {
     this.modelSerivce.setClassifier(model.image, model.modality).subscribe(res => {
       this.notificationService.showNotification(`Set ${model.displayName} as classifer for ${model.modality}`)
     })
+  }
+
+  deleteJob(job:EvalJobViewModel) {
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      data: {job}
+    });
+    dialogRef.afterClosed().subscribe(result => this.jobs$ = this.jobService.getJobs())
   }
 
 }

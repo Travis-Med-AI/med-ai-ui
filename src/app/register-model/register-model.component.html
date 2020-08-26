@@ -3,6 +3,7 @@
     {{model.displayName}}
     <button mat-button (click)="register(model)">Register</button>
   </mat-card>
+  <h3 *ngIf="availableModels.length < 1">NO NEW MODELS AVAILABLE</h3>
 </div>
 
 
