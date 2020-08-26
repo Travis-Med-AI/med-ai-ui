@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModelService } from '../services/model.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModelManifestItem } from 'med-ai-common';
 
 @Component({
   selector: 'app-register-model',
@@ -9,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./register-model.component.scss']
 })
 export class RegisterModelComponent implements OnInit {
-  availableModels = [];
+  availableModels: ModelManifestItem[] = [];
   constructor(private fb: FormBuilder, private modelService: ModelService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {

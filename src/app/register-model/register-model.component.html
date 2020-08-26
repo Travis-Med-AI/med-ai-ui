@@ -1,8 +1,22 @@
 <div>
-  <mat-card *ngFor="let model of availableModels">
-    {{model.displayName}}
-    <button mat-button (click)="register(model)">Register</button>
-  </mat-card>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let model of availableModels"
+                         >
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayoutAlign="center center">
+          {{model.displayName}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <button mat-button (click)="register(model)">Register</button>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <h3>Model Info</h3>
+      <div>Input: {{model.input}}</div>
+      <div>Output: {{model.output}}</div>
+      <div>Has Image Output: {{model.hasImageOutput}}</div>
+      <div>Image: {{model.tag}}</div>
+    </mat-expansion-panel>
+  </mat-accordion>
   <h3 *ngIf="availableModels.length < 1">NO NEW MODELS AVAILABLE</h3>
 </div>
 
