@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { NotificationService } from '../services/notification.service';
+import { NotificationMessage } from 'med-ai-common';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 
 interface sideNavItem {
   icon: string;
@@ -14,7 +18,7 @@ interface sideNavItem {
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-
+  notifications: NotificationMessage[] = []
   sidenavItems: sideNavItem[] = [
     {icon: 'insert_drive_file', routerLink: 'new-job', displayValue: 'Studies'},
     {icon: 'model_training', routerLink: 'evaluate-study', displayValue: 'Evaluate'},
@@ -25,10 +29,25 @@ export class SidenavComponent implements OnInit {
     {icon: 'settings', routerLink: 'settings', displayValue: 'Settings'},
   ]
   isDark = false;
-  constructor(private themeService: ThemeService) {
+  constructor(private notifService: NotificationService, private dialog: MatDialog) {
   }
 
-  ngOnInit(): void {
+  notifications$ = this.notifService.getNotifications();
 
+  ngOnInit(): void {
+    this.setupNotifications();
+  }
+
+  setupNotifications() {
+    this.notifService.getNotifications().subscribe(n => this.notifications = n);
+    this.notifService.getNotificationsSocket().subscribe(n => this.notifications = n)
+  }
+
+  openNotificationDialog() {
+    if(this.notifications.length < 1) return;
+
+    const dialogRef = this.dialog.open(NotificationDialogComponent, {
+      data: this.notifications
+    });
   }
 }

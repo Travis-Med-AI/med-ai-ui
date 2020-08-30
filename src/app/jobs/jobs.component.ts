@@ -6,7 +6,7 @@ import { VirtualTimeScheduler, interval } from 'rxjs';
 import { RegisterModelComponent } from '../register-model/register-model.component';
 import { ModelService } from '../services/model.service';
 import { startWith, switchMap } from 'rxjs/operators';
-import { EvalJobViewModel } from 'med-ai-common';
+import { EvalJobViewModel, Notifications } from 'med-ai-common';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 @Component({
@@ -16,11 +16,7 @@ import { DeleteConfirmationComponent } from './delete-confirmation/delete-confir
 })
 export class JobsComponent implements OnInit {
   jobs: EvalJobViewModel[] = []
-  jobs$ = interval(5000).pipe(
-    startWith(0),
-    switchMap(() => this.jobService.getJobs())
-  )
-  jobSubscription = this.jobs$.subscribe(jobs => this.jobs = jobs);
+  jobs$ = this.getJobs()
   displayedColumns = ['name', 'lastRun', 'jobToggle']
 
   constructor(private jobService:JobService,
@@ -29,6 +25,9 @@ export class JobsComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.notificationService.watchNotificationTypes([Notifications.modelReady]).subscribe(
+      n => this.getJobs()
+    )
   }
 
   addNew() {
@@ -51,13 +50,12 @@ export class JobsComponent implements OnInit {
   }
 
   getJobs() {
-    this.jobSubscription.unsubscribe()
-    this.jobSubscription = this.jobs$.subscribe(jobs => this.jobs = jobs);
+    this.jobService.getJobs().subscribe(j => this.jobs = j)
   }
 
   retry(image: string) {
     this.modelSerivce.retryModel(image).subscribe(i => {
-      this.jobs$ = this.jobService.getJobs();
+      this.jobService.getJobs();
       this.notificationService.showNotification('Successfully downloaded')
     })
   }
@@ -72,7 +70,7 @@ export class JobsComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       data: {job}
     });
-    dialogRef.afterClosed().subscribe(result => this.jobs$ = this.jobService.getJobs())
+    dialogRef.afterClosed().subscribe(result => this.jobService.getJobs())
   }
 
 }

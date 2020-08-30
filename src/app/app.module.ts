@@ -28,6 +28,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -45,6 +46,11 @@ import { OrthancComponent } from './orthanc/orthanc.component';
 import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { DeleteConfirmationComponent } from './jobs/delete-confirmation/delete-confirmation.component';
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { StdoutDialogComponent } from './evals/stdout-dialog/stdout-dialog.component';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { EvalImageDialogComponent } from './evals/eval-image-dialog/eval-image-dialog.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8000'}
 
@@ -66,7 +72,8 @@ const materialModules = [
   MatTooltipModule,
   MatToolbarModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatBadgeModule
 ]
 
 @NgModule({
@@ -83,11 +90,16 @@ const materialModules = [
     MonitorComponent,
     OrthancComponent,
     EvaluateStudyComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    NotificationDialogComponent,
+    StdoutDialogComponent,
+    EvalImageDialogComponent
   ],
   imports: [
     BrowserModule,
     SocketIoModule.forRoot(config),
+    InfiniteScrollModule,
+    NgxMasonryModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     DeviceDetectorModule,

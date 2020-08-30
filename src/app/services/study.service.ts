@@ -21,4 +21,8 @@ export class StudyService {
   countOrthancStudies(): Observable<number> {
     return this.http.get<{count: number}>(`${this.baseUrl}/orthanc-count`).pipe(map((s:any) => s.count))
   }
+
+  getPreviewUrl(studyId: number) {
+    return `http://localhost:8000/images/${studyId}.png`
+  }
 }

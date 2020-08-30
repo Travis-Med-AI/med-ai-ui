@@ -15,7 +15,7 @@ export class AppComponent {
     public notificationService: NotificationService,
     private deviceService: DeviceDetectorService) {
     this.themeService.theme.subscribe(theme => this.theme = THEMES_VALUES[theme]);
-    this.notificationService.watchNotifications();
+    this.notificationService.watchNewNotifications();
     this.isMobile = this.deviceService.isMobile();
   }
   title = 'med-ai-ui';

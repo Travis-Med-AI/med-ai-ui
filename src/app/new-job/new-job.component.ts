@@ -6,6 +6,7 @@ import { StudyService } from '../services/study.service';
 import { EvalService } from '../services/eval.service';
 import { NotificationService } from '../services/notification.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Notifications } from 'med-ai-common';
 
 @Component({
   selector: 'app-new-job',
@@ -23,6 +24,8 @@ export class NewJobComponent implements OnInit {
   orthancStudyCount$ = this.studyService.countOrthancStudies();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  pageIndex = 0;
+  pageSize = 10;
 
   constructor(private modelService: ModelService,
               private studyService: StudyService,
@@ -31,9 +34,16 @@ export class NewJobComponent implements OnInit {
               private deviceService: DeviceDetectorService) { }
 
   ngOnInit(): void {
-    this.fetchStudies(0, 10);
-    this.searchControl.valueChanges.subscribe(s => this.fetchStudies(0,10));
+    this.fetchStudies(this.pageIndex, this.pageSize);
+    this.searchControl.valueChanges.subscribe(s => {
+      if(this.paginator) {
+        this.paginator.pageIndex = 0;
+      }
+      this.fetchStudies(this.pageIndex, this.pageSize);
+    });
     this.setupColumns();
+    this.notificationService.watchNotificationTypes([Notifications.studyReady])
+      .subscribe(n => this.fetchStudies(this.pageIndex, this.pageSize))
   }
 
   setupColumns() {
@@ -61,6 +71,8 @@ export class NewJobComponent implements OnInit {
 
   page(pageEvent: PageEvent) {
     this.fetchStudies(pageEvent.pageIndex, pageEvent.pageSize)
+    this.pageSize = pageEvent.pageSize;
+    this.pageIndex = pageEvent.pageIndex;
   }
 
   fetchStudies(pageIndex: number, pageSize: number) {

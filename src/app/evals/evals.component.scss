@@ -5,3 +5,35 @@
 .search-bar {
   padding: 1rem;
 }
+
+.eval {
+  max-height: 15rem;
+  width: 45%;
+  margin: 1rem;
+}
+
+.avatar-default {
+  background-color: blue;
+}
+
+.avatar {
+  width:3rem;
+  height:3rem;
+  object-fit:cover;
+  border-radius:50%;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.item {
+  width: 20rem;
+  margin-left: 1rem; /* (100-32*3)/2 */
+  margin-bottom: 1rem; /* (100-32*3)/2 */
+  min-height: 8rem;
+}
+
+.container {
+  width: 100%;
+}

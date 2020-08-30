@@ -1,0 +1,14 @@
+<div>
+  <div fxLayoutAlign="end">
+    <button (click)="readAllNotifications()" mat-button>Clear</button>
+  </div>
+  <div *ngFor="let notification of notifications" fxLayoutAlign="space-between">
+    <div>
+      {{notification.message}}
+    </div>
+    <div>
+      <button (click)="view(notification)" mat-button>View</button>
+      <button (click)="readNotification(notification.id)" mat-button><mat-icon>close</mat-icon></button>
+    </div>
+  </div>
+</div>

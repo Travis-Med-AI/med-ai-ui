@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PagedResponse, StudyEvalVM } from 'med-ai-common';
+import { PagedResponse, StudyEvalVM, Sockets, ModelLogMessage } from 'med-ai-common';
+import { Socket } from 'ngx-socket-io';
+import { query } from '@angular/animations';
 
 
 @Injectable({
@@ -11,16 +13,16 @@ export class EvalService {
   baseUrl = 'http://localhost:8000/evals'
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socket: Socket) { }
 
 
   getEvals(page: number, pageSize: number, searchString: string): Observable<PagedResponse<StudyEvalVM>> {
     let params = {
-      page:`${page}`, 
-      pageSize: `${pageSize}`, 
+      page:`${page}`,
+      pageSize: `${pageSize}`,
       searchString
      }
-    
+
     return this.http.get<PagedResponse<StudyEvalVM>>(this.baseUrl, {params})
   }
 
@@ -31,7 +33,7 @@ export class EvalService {
   deleteEval(evalId:number) {
     return this.http.delete(`${this.baseUrl}/${evalId}`)
   }
-  
+
   getOutputImage(evalId: number) {
     this.http
     .get(`${this.baseUrl}/output-image?evalId=${evalId}`, { responseType: 'arraybuffer' }) //set response Type properly (it is not part of headers)
@@ -43,5 +45,20 @@ export class EvalService {
         window.open(url);
     })
     .catch(err => console.error("download error = ", err))
+  }
+
+  getOutputImageUrl(evalId:number) {
+    return `${this.baseUrl}/output-image?evalId=${evalId}`;
+  }
+
+  getLogSocket(evalId: number) {
+    return this.socket.fromEvent<ModelLogMessage>(`${Sockets.modelLog}-${evalId}`)
+  }
+
+  getLog(evalId: number) {
+    return this.http.get<string[]>(`${this.baseUrl}/logs`,
+                                  {
+                                    params: {evalId: evalId.toString()}
+                                  })
   }
 }

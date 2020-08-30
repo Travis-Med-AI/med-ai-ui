@@ -7,4 +7,12 @@
     </button>
   </div>
 </div>
-
+<div class="sidenav-item" matTooltip="Notifications">
+  <div>
+    <button mat-button class="sidenav-item" fxLayoutAlign="center" (click)="openNotificationDialog()">
+      <div [matBadge]="notifications.length" [matBadgeHidden]="notifications.length === 0">
+        <mat-icon>notifications</mat-icon>
+      </div>
+    </button>
+  </div>
+</div>
