@@ -25,6 +25,7 @@ export class SidenavComponent implements OnInit {
     {icon: 'add_to_queue', routerLink: 'jobs', displayValue: 'Models'},
     {icon: 'leaderboard', routerLink: 'evals', displayValue: 'Evals'},
     {icon: 'memory', routerLink: 'monitor', displayValue: 'Monitor'},
+    {icon: 'backpack', routerLink: 'research', displayValue: 'Research'},
     {icon: 'image', routerLink: 'orthanc', displayValue: 'Orthanc'},
     {icon: 'settings', routerLink: 'settings', displayValue: 'Settings'},
   ]

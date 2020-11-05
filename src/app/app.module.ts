@@ -29,6 +29,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
+import {  MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -51,6 +56,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StdoutDialogComponent } from './evals/stdout-dialog/stdout-dialog.component';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { EvalImageDialogComponent } from './evals/eval-image-dialog/eval-image-dialog.component';
+import { ResearchComponent } from './research/research.component';
+import { NewExperimentComponent } from './research/new-experiment/new-experiment.component';
+import { ExperimentsComponent } from './research/experiments/experiments.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8000'}
 
@@ -73,7 +81,10 @@ const materialModules = [
   MatToolbarModule,
   MatButtonModule,
   MatInputModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatRadioModule,
+  MatTabsModule,
+  MatProgressBarModule
 ]
 
 @NgModule({
@@ -93,11 +104,15 @@ const materialModules = [
     DeleteConfirmationComponent,
     NotificationDialogComponent,
     StdoutDialogComponent,
-    EvalImageDialogComponent
+    EvalImageDialogComponent,
+    ResearchComponent,
+    NewExperimentComponent,
+    ExperimentsComponent
   ],
   imports: [
     BrowserModule,
     SocketIoModule.forRoot(config),
+    MaterialFileInputModule,
     InfiniteScrollModule,
     NgxMasonryModule,
     AppRoutingModule,

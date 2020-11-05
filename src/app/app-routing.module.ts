@@ -9,6 +9,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MonitorComponent } from './monitor/monitor.component';
 import { OrthancComponent } from './orthanc/orthanc.component';
 import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
+import { ResearchComponent } from './research/research.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'monitor', component: MonitorComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'orthanc', component: OrthancComponent },
+  { path: 'research', component: ResearchComponent },
   { path: '', redirectTo: 'landing', pathMatch: 'full'},
   { path: '*', redirectTo: 'landing' },
 ];

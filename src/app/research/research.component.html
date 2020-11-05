@@ -1,0 +1,7 @@
+<div fxLayoutAlign="center center">
+  <button mat-icon-button (click)="addNew()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<app-new-experiment *ngIf="adding"></app-new-experiment>
+<app-experiments></app-experiments>
