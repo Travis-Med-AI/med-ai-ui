@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+
+.experiment-header {
+  width: 100%;
+  cursor: pointer;
+}
+
+.mat-card-header-text {
+  width: 100%;
+}
+
+.mat-card-avatar {
+  height: 5rem !important;
+  width: 5rem  !important;
+}
+
+.folder-icon.mat-icon {
+  height: 5rem;
+  width: 5rem;
+  font-size: 5rem;
+}
+
+.study-card {
+  width: 10rem;
+  margin: 0.5rem;
+  height: 1.5rem;
+  overflow: hidden;
+}
+
+.experiment-studies-container {
+  max-height: 8rem;
+  overflow-y: auto;
+}
+
+.finished-card {
+  background-color: mat-color($mat-green, 100);
+}
+
+.running-card {
+  background-color: mat-color($mat-blue, 100);
+}
+
+.failed-card {
+  background-color: mat-color($mat-red, 100);
+}

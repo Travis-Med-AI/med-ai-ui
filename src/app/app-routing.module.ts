@@ -9,6 +9,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MonitorComponent } from './monitor/monitor.component';
 import { OrthancComponent } from './orthanc/orthanc.component';
 import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
+import { ExperimentsComponent } from './experiments/experiments.component';
 
 
 const routes: Routes = [
@@ -18,15 +19,16 @@ const routes: Routes = [
   { path: 'register-model', component: RegisterModelComponent },
   { path: 'jobs', component: JobsComponent },
   { path: 'evals', component: EvalsComponent },
+  { path: 'experiments', component: ExperimentsComponent },
   { path: 'monitor', component: MonitorComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'orthanc', component: OrthancComponent },
-  { path: '', redirectTo: 'landing', pathMatch: 'full'},
-  { path: '*', redirectTo: 'landing' },
+  { path: '', redirectTo: '/landing', pathMatch: 'full'},
+  { path: '*', redirectTo: '/landing' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

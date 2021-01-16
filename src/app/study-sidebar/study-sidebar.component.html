@@ -1,0 +1,57 @@
+<div fxLayout="column" fxFill>
+  <div infiniteScroll
+  [infiniteScrollDistance]="5"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+  class="studies-container"
+  [scrollWindow]="false"
+  fxFlex="95">
+  <h2>Data</h2>
+  <div class="search-bar">
+    <mat-form-field  fxFill>
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search" [formControl]="searchControl">
+    </mat-form-field>
+    </div>
+    <mat-form-field class="filter-button">
+      <mat-label>Experiment</mat-label>
+      <mat-select [formControl]="experimentFilterControl">
+        <mat-option *ngFor="let experiment of experiments" [value]="experiment.id">
+          {{experiment.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button class="filter-button" (click)="showFilters = !showFilters">Filters</button>
+    <div class="filters" *ngIf="showFilters">
+      <mat-form-field fxFill>
+        <mat-label>Study Type</mat-label>
+        <mat-select [formControl]="studyTypeControl">
+          <mat-option *ngFor="let studyType of studyTypes" [value]="studyType">
+            {{studyType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div  cdkDropList
+        [cdkDropListConnectedTo]="getExperimentIds()"
+        id="studies">
+      <mat-card   *ngFor="let study of studies"
+                  class="study-card"
+                  [ngClass]="{'active': isSelected(study.orthancStudyId), 'hidden': hideDragged && isSelected(study.orthancStudyId)}"
+                  (click)="toggleSelect(study.orthancStudyId)"
+                  cdkDrag
+                  [cdkDragData]="study"
+                  (cdkDragStarted)="hideMultiple()"
+                  (cdkDragEnded)="showMultiple()">
+        {{study.orthancStudyId}}
+      </mat-card>
+    </div>
+  </div>
+
+  <button
+    mat-button
+    (click)="addStudies()"
+    class="add-experiment-button"
+    [disabled]="!experimentFilterControl.value"
+    fxFlex="5">Add Selected to Experiment</button>
+</div>

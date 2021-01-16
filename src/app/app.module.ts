@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -29,6 +30,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewJobComponent } from './new-job/new-job.component';
@@ -51,6 +54,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StdoutDialogComponent } from './evals/stdout-dialog/stdout-dialog.component';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { EvalImageDialogComponent } from './evals/eval-image-dialog/eval-image-dialog.component';
+import { ExperimentsComponent } from './experiments/experiments.component';
+import { NewExperimentComponent } from './new-experiment/new-experiment.component';
+import { ExperimentCardComponent } from './experiment-card/experiment-card.component';
+import { StudySidebarComponent } from './study-sidebar/study-sidebar.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8000'}
 
@@ -73,7 +80,8 @@ const materialModules = [
   MatToolbarModule,
   MatButtonModule,
   MatInputModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatProgressBarModule
 ]
 
 @NgModule({
@@ -93,7 +101,11 @@ const materialModules = [
     DeleteConfirmationComponent,
     NotificationDialogComponent,
     StdoutDialogComponent,
-    EvalImageDialogComponent
+    EvalImageDialogComponent,
+    ExperimentsComponent,
+    NewExperimentComponent,
+    ExperimentCardComponent,
+    StudySidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +123,7 @@ const materialModules = [
     CdkTableModule,
     CdkScrollableModule,
     ScrollingModule,
+    DragDropModule,
     ...materialModules
   ],
   providers: [],

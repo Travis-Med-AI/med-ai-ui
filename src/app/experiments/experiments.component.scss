@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+
+.container {
+  height:100%;
+}
+
+.expand-button {
+  cursor: pointer;
+  width: 2rem !important;
+  position: absolute;
+  left:0;
+  top: 0;
+  background-color: white;
+  height: 100%;
+  border:none;
+}
+
+.tree-drawer {
+  width: 15rem;
+  padding: 1rem;
+}
+
+.data-content {
+  flex:1;
+  padding: 1rem;
+  margin-left: 2rem;
+}
+
+.content {
+  height: 100%;
+  overflow: auto;
+}
+
+.sidenav {
+  height: 100%;
+}
