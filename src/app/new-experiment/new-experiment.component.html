@@ -1,0 +1,15 @@
+<div>
+  <mat-form-field  fxFill>
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Experiment Name" [formControl]="nameControl">
+  </mat-form-field>
+  <mat-form-field fxFill>
+    <mat-label>Study Type</mat-label>
+    <mat-select [formControl]="studyTypeControl">
+      <mat-option *ngFor="let studyType of studyTypes" [value]="studyType">
+        {{studyType}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button (click)="createExperiment()" fxFill>Add</button>
+</div>

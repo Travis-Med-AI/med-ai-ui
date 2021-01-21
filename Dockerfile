@@ -19,7 +19,8 @@ RUN npm install
 # add app
 COPY . /app
 
+RUN npm install http-server -g
 RUN npm run build
 
 # start app
-CMD npm start
+CMD http-server -p 4200 ./dist/med-ai-ui

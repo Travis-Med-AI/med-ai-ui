@@ -13,9 +13,9 @@ export class StudyService {
 
   constructor(private http: HttpClient) { }
 
-  getStudies(page: number, pageSize: number, searchString: string): Observable<PagedResponse<StudyViewModel>>{
+  getStudies(page: number, pageSize: number, searchString: string, studyType:string=''): Observable<PagedResponse<StudyViewModel>>{
     return this.http.get<PagedResponse<StudyViewModel>>(`${this.baseUrl}`,
-                         {params: {page:`${page}`, pageSize: `${pageSize}`, searchString}})
+                         {params: {page:`${page}`, pageSize: `${pageSize}`, searchString: searchString || '', studyType: studyType || ''}})
   }
 
   countOrthancStudies(): Observable<number> {

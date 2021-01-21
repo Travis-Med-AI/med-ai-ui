@@ -1,0 +1,31 @@
+<mat-drawer-container class="container">
+  <mat-drawer mode="side"
+              #treeDrawer
+              opened
+              position="start"
+              class="tree-drawer">
+    <app-study-sidebar (studiesSelected)="updateSelectedStudies($event)" [experiments]="experiments" class="sidenav"></app-study-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button color="primary"
+    fxLayoutAlign="center center"
+    (click)="treeDrawer.toggle()"
+    class="expand-button mat-elevation-z8 mat-ripple">
+      <mat-icon>{{treeDrawer.opened? 'navigate_before': 'navigate_next'}}</mat-icon>
+    </button>
+    <div class="content">
+      <div class="data-content">
+        <div fxLayoutAlign="space-between">
+          <h2>Manage Experiments</h2>
+          <button mat-icon-button (click)="createNewExperiment()"><mat-icon>add</mat-icon></button>
+        </div>
+        <div *ngIf="experiments" fxLayout="column" fxLayoutGap="16px">
+          <app-experiment-card *ngFor="let experiment of experiments"
+                               [experiment]="experiment"
+                               [selectedStudies]="selectedStudies"
+                               (deleted)="getExperiments()"></app-experiment-card>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
