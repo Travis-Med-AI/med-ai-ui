@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { StudyViewModel } from 'med-ai-common';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Notifications } from 'med-ai-common';
 import { ExperimentService } from '../services/experiment.service';
-import { StudyService } from '../services/study.service';
-import { concat, includes, remove } from 'lodash';
-import { CdkDragDrop, DropListRef } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { NewExperimentComponent } from '../new-experiment/new-experiment.component';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-experiments',
@@ -20,10 +17,19 @@ export class ExperimentsComponent implements OnInit {
   selectedStudies = [];
 
   constructor(private experimentService: ExperimentService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private notficiationService: NotificationService) { }
 
   ngOnInit(): void {
     this.getExperiments();
+    let notificationTypes = [
+      Notifications.experimentFailed,
+      Notifications.experimentFinished,
+      Notifications.experimentStarted,
+      Notifications.experimentUpdated
+    ]
+    this.notficiationService.watchNotificationTypes(notificationTypes)
+        .subscribe(n => this.getExperiments())
   }
 
   getExperiments() {

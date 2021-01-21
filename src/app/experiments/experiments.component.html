@@ -20,7 +20,10 @@
           <button mat-icon-button (click)="createNewExperiment()"><mat-icon>add</mat-icon></button>
         </div>
         <div *ngIf="experiments" fxLayout="column" fxLayoutGap="16px">
-          <app-experiment-card *ngFor="let experiment of experiments" [experiment]="experiment" [selectedStudies]="selectedStudies"></app-experiment-card>
+          <app-experiment-card *ngFor="let experiment of experiments"
+                               [experiment]="experiment"
+                               [selectedStudies]="selectedStudies"
+                               (deleted)="getExperiments()"></app-experiment-card>
         </div>
       </div>
     </div>

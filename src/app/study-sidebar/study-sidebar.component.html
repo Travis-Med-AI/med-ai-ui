@@ -21,8 +21,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-button class="filter-button" (click)="showFilters = !showFilters">Filters</button>
-    <div class="filters" *ngIf="showFilters">
+    <div class="filters">
       <mat-form-field fxFill>
         <mat-label>Study Type</mat-label>
         <mat-select [formControl]="studyTypeControl">
@@ -32,13 +31,14 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <button mat-button class="filter-button" (click)="clearFilters()">Clear</button>
     <div  cdkDropList
         [cdkDropListConnectedTo]="getExperimentIds()"
         id="studies">
       <mat-card   *ngFor="let study of studies"
                   class="study-card"
-                  [ngClass]="{'active': isSelected(study.orthancStudyId), 'hidden': hideDragged && isSelected(study.orthancStudyId)}"
-                  (click)="toggleSelect(study.orthancStudyId)"
+                  [ngClass]="{'active': isSelected(study.id), 'hidden': hideDragged && isSelected(study.id)}"
+                  (click)="toggleSelect(study.id)"
                   cdkDrag
                   [cdkDragData]="study"
                   (cdkDragStarted)="hideMultiple()"
@@ -53,5 +53,11 @@
     (click)="addStudies()"
     class="add-experiment-button"
     [disabled]="!experimentFilterControl.value"
-    fxFlex="5">Add Selected to Experiment</button>
+    fxFlex="3">Add Selected to Experiment</button>
+  <button
+    mat-button
+    (click)="addAllToExperiment()"
+    class="add-experiment-button"
+    [disabled]="!experimentFilterControl.value"
+    fxFlex="3">Add All to Experiment</button>
 </div>

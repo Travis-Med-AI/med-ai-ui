@@ -12,7 +12,7 @@ import { ExperimentService } from '../services/experiment.service';
 export class NewExperimentComponent implements OnInit {
   nameControl = new FormControl();
   studyTypeControl = new FormControl();
-  studyTypes = Object.keys(StudyType)
+  studyTypes = Object.values(StudyType)
 
 
   constructor(private experimentService: ExperimentService,

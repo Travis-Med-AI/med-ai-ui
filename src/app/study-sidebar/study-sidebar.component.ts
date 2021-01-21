@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { concat, includes, remove } from 'lodash';
-import { StudyType, StudyViewModel } from 'med-ai-common';
-import { ExperimentService, ExperimentViewModel } from '../services/experiment.service';
+import { ExperimentViewModel, StudyType, StudyViewModel } from 'med-ai-common';
+import { ExperimentService } from '../services/experiment.service';
+import { NotificationService } from '../services/notification.service';
 import { StudyService } from '../services/study.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class StudySidebarComponent implements OnInit {
   @Output() studiesSelected: EventEmitter<string[]> = new EventEmitter()
   @Input() experiments: ExperimentViewModel[] = [];
 
-  studyTypes = Object.keys(StudyType)
+  studyTypes = Object.values(StudyType)
 
   experimentFilterControl = new FormControl();
   studyTypeControl = new FormControl();
@@ -30,23 +31,31 @@ export class StudySidebarComponent implements OnInit {
   showFilters = false;
   selectedExperiment: number;
 
-  constructor(private experimentService: ExperimentService, private studyService: StudyService) { }
+  constructor(private experimentService: ExperimentService,
+              private studyService: StudyService,
+              private notificationService: NotificationService
+    ) { }
 
   ngOnInit(): void {
     this.experimentFilterControl.valueChanges.subscribe(e=> {
-      this.selectedExperiment = e;
-      this.reset()
+      if(e) {
+        this.selectedExperiment = e;
+        this.reset()
+      }
     }
     )
     this.fetchStudies();
     this.searchControl.valueChanges.subscribe(v => {
-      this.reset()
+      if(v) this.reset()
+    })
+    this.studyTypeControl.valueChanges.subscribe(e => {
+      if(e) this.reset()
     })
   }
 
   reset() {
     this.pageIndex = 0;
-    this.visibleStudies = 10;
+    this.visibleStudies = 0;
     this.studies = [];
     this.fetchStudies();
   }
@@ -58,14 +67,21 @@ export class StudySidebarComponent implements OnInit {
 
   fetchStudies() {
     if(!this.selectedExperiment) {
-      this.studyService.getStudies(this.pageIndex, this.pageSize, this.searchControl.value).subscribe(
+      this.studyService.getStudies(this.pageIndex,
+                                   this.pageSize,
+                                   this.searchControl.value,
+                                   this.studyTypeControl.value).subscribe(
         studies => {
           this.visibleStudies += studies.total;
           this.studies = concat(this.studies, studies.payload);
         }
       )
     } else {
-      this.experimentService.getUnusedStudies(this.selectedExperiment, this.pageIndex, this.pageSize, this.searchControl.value).subscribe(
+      this.experimentService.getUnusedStudies(this.selectedExperiment,
+                                              this.pageIndex,
+                                              this.pageSize,
+                                              this.searchControl.value,
+                                              this.studyTypeControl.value).subscribe(
         studies => {
           this.visibleStudies += studies.total;
           this.studies = concat(this.studies, studies.payload);
@@ -75,17 +91,17 @@ export class StudySidebarComponent implements OnInit {
 
   }
 
-  toggleSelect(orthancStudyId: string) {
-    if(!includes(this.selectedStudies, orthancStudyId)) {
-      this.selectedStudies.push(orthancStudyId);
+  toggleSelect(studyId: string) {
+    if(!includes(this.selectedStudies, studyId)) {
+      this.selectedStudies.push(studyId);
     } else {
-      remove(this.selectedStudies, s => s === orthancStudyId)
+      remove(this.selectedStudies, s => s === studyId)
     }
     this.studiesSelected.emit(this.selectedStudies)
   }
 
-  isSelected(orthancStudyId: string) {
-    return includes(this.selectedStudies, orthancStudyId)
+  isSelected(studyId: string) {
+    return includes(this.selectedStudies, studyId)
   }
 
   hideMultiple() {
@@ -102,6 +118,21 @@ export class StudySidebarComponent implements OnInit {
 
   addStudies() {
     let selectedStudies = this.selectedStudies.map(s => parseInt(s))
-    this.experimentService.addStudiesToExperiment(selectedStudies, this.experimentFilterControl.value).subscribe(s => this.studies = s.payload)
+    this.experimentService.addStudiesToExperiment(selectedStudies,
+                                                  this.experimentFilterControl.value).subscribe(s => this.reset())
+  }
+
+  addAllToExperiment() {
+    this.experimentService.addAllToExperiment(this.experimentFilterControl.value || '',
+                                              this.searchControl.value || '',
+                                              this.studyTypeControl.value || '').subscribe(s => this.reset())
+  }
+
+  clearFilters() {
+    this.experimentFilterControl.reset();
+    this.studyTypeControl.reset();
+    this.searchControl.reset();
+    this.selectedExperiment = null;
+    this.reset()
   }
 }
