@@ -42,8 +42,9 @@
                   cdkDrag
                   [cdkDragData]="study"
                   (cdkDragStarted)="hideMultiple()"
-                  (cdkDragEnded)="showMultiple()">
-        {{study.orthancStudyId}}
+                  (cdkDragEnded)="showMultiple()"
+                  [matTooltip]="study.orthancStudyId">
+        {{(study.orthancStudyId.length>6)? (study.patientId | slice:0:6)+'...':(study.orthancStudyId)}}
       </mat-card>
     </div>
   </div>
