@@ -33,7 +33,7 @@
         <mat-card-subtitle>Diagnosis: {{eval.modelOutput? eval.modelOutput.display: 'TBD'}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content *ngIf="eval.id === visibleEval">
-        <div>
+        <div class="class-probs">
           <h3>Class Probabilities</h3>
           <div *ngFor="let item of eval.modelOutput.class_probabilities | keyvalue" fxLayoutAlign="space-between">
             <span>{{item.key}}</span>
