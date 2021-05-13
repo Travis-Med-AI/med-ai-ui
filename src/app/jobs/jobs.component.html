@@ -7,7 +7,7 @@
 <div *ngIf="jobs" fxLayout="row wrap" class="job-container" fxLayoutAlign="center">
   <mat-card *ngFor="let job of jobs"
             class="job-card"
-            [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed }"
+            [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed, 'quickstart-card': job.model.quickstart }"
             fxLayout="column">
 
     {{job.model.displayName}}
@@ -15,6 +15,7 @@
       <button mat-button>Info</button>
       <button mat-button (click)="toggleJob(job.id, job.running)">Turn {{job.running? 'Off': 'On'}}</button>
       <button mat-button (click)="setAsClassifier(job.model)">Use as {{job.model.modality}} classifier</button>
+      <button mat-button (click)="toggleQuickstart(job.model)">Quickstart</button>
     </div>
     <div *ngIf="job.model.failed"> Download Failed </div>
     <div *ngIf="!job.model.pulled && !job.model.failed"> Downloading...</div>

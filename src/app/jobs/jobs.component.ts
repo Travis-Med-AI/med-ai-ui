@@ -73,4 +73,11 @@ export class JobsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => this.jobService.getJobs())
   }
 
+  toggleQuickstart(model: any) {
+    this.modelSerivce.toggleQuickstart(model.id).subscribe(j => {
+      this.getJobs()
+      this.notificationService.showNotification('Successfully toggle job')
+    })
+  }
+
 }

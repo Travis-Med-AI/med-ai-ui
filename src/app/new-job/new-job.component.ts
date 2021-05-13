@@ -55,7 +55,7 @@ export class NewJobComponent implements OnInit {
       'modality',
       'studyType'
     ]
-    let actionColumn = ['submit']
+    let actionColumn = ['submit', 'delete']
     if(this.deviceService.isMobile()) {
       this.displayedColumns = mobileColumns.concat(actionColumn)
     } else {
@@ -87,6 +87,12 @@ export class NewJobComponent implements OnInit {
 
   filterModels(models, study) {
     return models.filter(m => m.input === study.type)
+  }
+
+  deleteStudy(study) {
+    this.studyService.deleteStudy(study.id)
+    .subscribe(res => this.notificationService.showNotification(`deleted study ${study.id}`));
+
   }
 
 }

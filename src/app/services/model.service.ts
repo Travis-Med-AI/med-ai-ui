@@ -44,4 +44,8 @@ export class ModelService {
   deleteModel(modelId: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${modelId}`)
   }
+
+  toggleQuickstart(modelId: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/toggle-quickstart`, {id:modelId})
+  }
 }

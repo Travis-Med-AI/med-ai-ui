@@ -25,4 +25,9 @@ export class StudyService {
   getPreviewUrl(studyId: number) {
     return `http://localhost:8000/images/${studyId}.png`
   }
+
+  deleteStudy(studyId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${studyId}`)
+  }
+
 }

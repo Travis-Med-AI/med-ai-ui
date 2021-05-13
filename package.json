@@ -25,7 +25,7 @@
     "file-saver": "^2.0.2",
     "lodash": "^4.17.20",
     "masonry-layout": "^4.2.2",
-    "med-ai-common": "github:Travis-Med-AI/med-ai-common",
+    "med-ai-common": "git+https://github.com/Travis-Med-AI/med-ai-common.git",
     "ngx-device-detector": "1.4.6",
     "ngx-infinite-scroll": "^9.0.0",
     "ngx-masonry": "^10.0.5",
