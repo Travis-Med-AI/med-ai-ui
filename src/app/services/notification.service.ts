@@ -7,14 +7,18 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, interval } from 'rxjs';
 import * as _ from 'lodash';
 import { debounce, throttle } from 'lodash';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  baseUrl = 'http://localhost:8000/realtime';
+  baseUrl = `${this.settingsService.getServerUrl()}/realtime`;
 
-  constructor(private snackBar: MatSnackBar, private socket: Socket, private http: HttpClient) { }
+  constructor(private snackBar: MatSnackBar,
+              private socket: Socket,
+              private http: HttpClient,
+              private settingsService: SettingsService) { }
 
   showNotification(message: string) {
     this.snackBar.open(message, '', {duration: 2000});

@@ -29,7 +29,8 @@
             <mat-icon *ngIf="eval.status === 'FAILED'" color="warn">cancel</mat-icon>
           </div>
         </div>
-        <mat-card-title>{{eval.study.patientId}}</mat-card-title>
+        <mat-card-title
+          [matTooltip]="eval.study.seriesUid">{{(eval.study.seriesUid.length>15)? (eval.study.seriesUid | slice:0:15)+'...':(eval.study.seriesUid)}}</mat-card-title>
         <mat-card-subtitle>Diagnosis: {{eval.modelOutput? eval.modelOutput.display: 'TBD'}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content *ngIf="eval.id === visibleEval">

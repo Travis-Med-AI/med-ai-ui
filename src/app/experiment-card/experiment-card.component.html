@@ -34,14 +34,22 @@
       </mat-form-field>
       <div class="full-width">
         <button mat-button color="primary" (click)="startExperiment()" class="full-width">Start Experiment</button>
+        <button mat-button color="accent" class="full-width" (click)="downloadResults()">Download Results Early</button>
+        <button mat-button color="primary" (click)="getStats()" class="full-width">Get Stats</button>
       </div>
     </div>
     <div *ngIf="experiment.status === statuses.RUNNING">
-      <mat-progress-bar mode="determinate" [value]="experiment.progress"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="experiment.progress*100"></mat-progress-bar>
       <button mat-button color="warn" class="full-width" (click)="stopExperiment()">Stop Experiment</button>
     </div>
     <div *ngIf="experiment.status  === statuses.COMPLETED">
       <button mat-button  class="full-width" (click)="downloadResults()">Download Results</button>
+    </div>
+
+    <div *ngIf="stats">
+      <div>
+        {{JSON.stringify(stats)}}
+      </div>
     </div>
     <button mat-raised-button class="full-width" color="warn" (click)="deleteExperiment()">Delete Experiment</button>
     <div  fxLayout="row wrap"
@@ -59,8 +67,8 @@
                 cdkDrag
                 [cdkDragData]="study"
                 [cdkDragDisabled]="true"
-                [matTooltip]="study.orthancStudyId"
-                >{{(study.orthancStudyId.length>6)? (study.patientId | slice:0:6)+'...':(study.orthancStudyId)}}</mat-card>
+                [matTooltip]="study.seriesUid"
+                >{{(study.seriesUid.length>15)? (study.seriesUid | slice:0:15)+'...':(study.seriesUid)}}</mat-card>
       </div>
   </div>
 

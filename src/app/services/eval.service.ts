@@ -4,16 +4,17 @@ import { Observable } from 'rxjs';
 import { PagedResponse, StudyEvalVM, Sockets, ModelLogMessage } from 'med-ai-common';
 import { Socket } from 'ngx-socket-io';
 import { query } from '@angular/animations';
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvalService {
-  baseUrl = 'http://localhost:8000/evals'
+  baseUrl = `${this.settingsSerivce.getServerUrl()}/evals`
 
 
-  constructor(private http: HttpClient, private socket: Socket) { }
+  constructor(private http: HttpClient, private socket: Socket, private settingsSerivce: SettingsService) { }
 
 
   getEvals(page: number, pageSize: number, searchString: string): Observable<PagedResponse<StudyEvalVM>> {

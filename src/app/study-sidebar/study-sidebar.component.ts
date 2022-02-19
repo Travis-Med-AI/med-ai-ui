@@ -18,8 +18,11 @@ export class StudySidebarComponent implements OnInit {
 
   studyTypes = Object.values(StudyType)
 
+  modalities = ['CT', 'MR']
+
   experimentFilterControl = new FormControl();
   studyTypeControl = new FormControl();
+  modalityControl = new FormControl();
   experiementIds: string[] = [];
   studies: StudyViewModel[] = []
   searchControl = new FormControl('');
@@ -49,6 +52,9 @@ export class StudySidebarComponent implements OnInit {
       if(v) this.reset()
     })
     this.studyTypeControl.valueChanges.subscribe(e => {
+      if(e) this.reset()
+    })
+    this.modalityControl.valueChanges.subscribe(e => {
       if(e) this.reset()
     })
   }
@@ -81,7 +87,8 @@ export class StudySidebarComponent implements OnInit {
                                               this.pageIndex,
                                               this.pageSize,
                                               this.searchControl.value,
-                                              this.studyTypeControl.value).subscribe(
+                                              this.studyTypeControl.value,
+                                              this.modalityControl.value).subscribe(
         studies => {
           this.visibleStudies += studies.total;
           this.studies = concat(this.studies, studies.payload);
@@ -125,7 +132,8 @@ export class StudySidebarComponent implements OnInit {
   addAllToExperiment() {
     this.experimentService.addAllToExperiment(this.experimentFilterControl.value || '',
                                               this.searchControl.value || '',
-                                              this.studyTypeControl.value || '').subscribe(s => this.reset())
+                                              this.studyTypeControl.value || '',
+                                              this.modalityControl.value || '').subscribe(s => this.reset())
   }
 
   clearFilters() {

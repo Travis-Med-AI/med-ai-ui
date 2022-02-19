@@ -30,7 +30,15 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      
+      <mat-form-field fxFill>
+        <mat-label>Study Modality</mat-label>
+        <mat-select [formControl]="modalityControl">
+          <mat-option *ngFor="let modality of modalities" [value]="modality">
+            {{modality}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
     </div>
     <button mat-button class="filter-button" (click)="clearFilters()">Clear</button>
     <div  cdkDropList
@@ -44,8 +52,8 @@
                   [cdkDragData]="study"
                   (cdkDragStarted)="hideMultiple()"
                   (cdkDragEnded)="showMultiple()"
-                  [matTooltip]="study.orthancStudyId">
-        {{(study.orthancStudyId.length>6)? (study.patientId | slice:0:6)+'...':(study.orthancStudyId)}}
+                  [matTooltip]="study.seriesUid">
+        {{(study.seriesUid.length>15)? (study.seriesUid | slice:0:15)+'...':(study.seriesUid)}}
       </mat-card>
     </div>
   </div>

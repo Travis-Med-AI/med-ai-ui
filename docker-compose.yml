@@ -1,15 +1,14 @@
 version: '2.3'
 services:
-    ai-ui:
-
-        build:
-            context: .
-            dockerfile: ./Dockerfile
-        ports:
-            - "4200:4200"
+  ai-ui:
+    build:
+        context: .
+        dockerfile: ./Dockerfile
+    ports:
+        - "4200:4200"
 
 
 networks:
-    default:
-        external:
-            name: ai-network
+  default:
+    external:
+      name: ai-network

@@ -2,7 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { concat } from 'lodash';
-import { ExperimentStatus, ExperimentViewModel, StudyViewModel } from 'med-ai-common';
+import { ExperimentStatsViewModel, ExperimentStatus, ExperimentViewModel, StudyViewModel } from 'med-ai-common';
 import { ExperimentService } from '../services/experiment.service';
 import { ModelService } from '../services/model.service';
 import { NotificationService } from '../services/notification.service';
@@ -18,11 +18,13 @@ export class ExperimentCardComponent implements OnInit {
   @Input() selectedStudies: number[]
   @Output() deleted: EventEmitter<boolean> = new EventEmitter()
 
+  JSON = JSON;
   statuses = ExperimentStatus
   models$ = this.modelService.getModels();
   studies: StudyViewModel[];
   modelControl = new FormControl();
   expanded = false;
+  stats: ExperimentStatsViewModel;
   constructor(private experimentService: ExperimentService,
               private modelService: ModelService,
               private notificationService: NotificationService) { }
@@ -71,5 +73,11 @@ export class ExperimentCardComponent implements OnInit {
 
   downloadResults() {
     this.experimentService.getResults(this.experiment.id);
+  }
+
+  getStats() {
+    this.experimentService.getEvalStats(this.experiment.id).subscribe(
+      s => this.stats = s
+    )
   }
 }

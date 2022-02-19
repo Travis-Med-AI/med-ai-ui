@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EvalJobViewModel } from 'med-ai-common';
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  baseUrl = 'http://localhost:8000/jobs'
+  baseUrl = `${this.settingsService.getServerUrl()}/jobs`
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private settingsService: SettingsService) { }
 
   getJobs(): Observable<EvalJobViewModel[]> {
     return this.http.get<EvalJobViewModel[]>(`${this.baseUrl}`)

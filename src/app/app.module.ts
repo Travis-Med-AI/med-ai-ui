@@ -34,11 +34,11 @@ import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NewJobComponent } from './new-job/new-job.component';
+import { NewJobComponent } from './studies/studies.component';
 import { RegisterModelComponent } from './register-model/register-model.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import { JobsComponent } from './jobs/jobs.component';
+import { ModelsComponent } from './models/models.component';
 import { EvalsComponent } from './evals/evals.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -48,7 +48,7 @@ import { MonitorComponent } from './monitor/monitor.component';
 import { OrthancComponent } from './orthanc/orthanc.component';
 import { EvaluateStudyComponent } from './evaluate-study/evaluate-study.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { DeleteConfirmationComponent } from './jobs/delete-confirmation/delete-confirmation.component';
+import { DeleteConfirmationComponent } from './models/delete-confirmation/delete-confirmation.component';
 import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StdoutDialogComponent } from './evals/stdout-dialog/stdout-dialog.component';
@@ -58,8 +58,13 @@ import { ExperimentsComponent } from './experiments/experiments.component';
 import { NewExperimentComponent } from './new-experiment/new-experiment.component';
 import { ExperimentCardComponent } from './experiment-card/experiment-card.component';
 import { StudySidebarComponent } from './study-sidebar/study-sidebar.component';
+import { environment } from '../environments/environment';
+import { LabelDialogComponent } from './label-dialog/label-dialog.component';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
+import { ModelDropdownComponent } from './model-dropdown/model-dropdown.component';
+import { ExperimentAnalysisComponent } from './experiment-anaylsis/experiment-analysis.component';
 
-const config: SocketIoConfig = { url: 'http://localhost:8000'}
+const config: SocketIoConfig = { url: environment.API_URL}
 
 const materialModules = [
   MatPaginatorModule,
@@ -91,7 +96,7 @@ const materialModules = [
     LandingComponent,
     NewJobComponent,
     RegisterModelComponent,
-    JobsComponent,
+    ModelsComponent,
     EvalsComponent,
     TruncatePipe,
     SettingsComponent,
@@ -105,7 +110,10 @@ const materialModules = [
     ExperimentsComponent,
     NewExperimentComponent,
     ExperimentCardComponent,
-    StudySidebarComponent
+    StudySidebarComponent,
+    LabelDialogComponent,
+    ModelDropdownComponent,
+    ExperimentAnalysisComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +132,7 @@ const materialModules = [
     CdkScrollableModule,
     ScrollingModule,
     DragDropModule,
+    NgxCsvParserModule,
     ...materialModules
   ],
   providers: [],

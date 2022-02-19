@@ -3,15 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ModelViewModel, ModelManifestItem, ClassifierViewModel } from 'med-ai-common';
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelService {
-  baseUrl = 'http://localhost:8000/models'
+  baseUrl = `${this.settingsService.getServerUrl()}/models`
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private settingsService: SettingsService) { }
 
   getModels(): Observable<ModelViewModel[]> {
     return this.http.get<ModelViewModel[]>(`${this.baseUrl}`)

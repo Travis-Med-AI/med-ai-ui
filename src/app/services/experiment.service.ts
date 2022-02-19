@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
-import { ExperimentViewModel, PagedResponse, StudyType, StudyViewModel } from 'med-ai-common';
+import { ExperimentViewModel,
+         ExperimentStatsViewModel,
+         PagedResponse,
+         StudyType,
+         StudyViewModel } from 'med-ai-common';
 import { Observable, of } from 'rxjs';
 import { StudyService } from './study.service';
 import { HttpClient } from '@angular/common/http';
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExperimentService {
-  baseUrl = 'http://localhost:8000/experiments'
+  baseUrl = `${this.settingsService.getServerUrl()}/experiments`
 
   constructor(private studyService: StudyService,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private settingsService: SettingsService) { }
 
   getExperiments(): Observable<ExperimentViewModel[]> {
     return this.http.get<ExperimentViewModel[]>(this.baseUrl)
   }
 
-  getStudiesByExperiment(id: number, page=0, pageSize=15, studyType?: StudyType): Observable<PagedResponse<StudyViewModel>> {
+  getStudiesByExperiment(id: number, page=0, pageSize=15, studyType?: StudyType, modality?: string): Observable<PagedResponse<StudyViewModel>> {
     return this.http.get<PagedResponse<StudyViewModel>>(this.baseUrl + '/studies',
-     { params: {id: id.toString(), page: page.toString(), pageSize: pageSize.toString(), studyType: studyType || ''} })
+     { params: {id: id.toString(), page: page.toString(), pageSize: pageSize.toString(), studyType: studyType || '', modality: modality || ''} })
   }
 
   addStudiesToExperiment(studyIds: number[], experimentId: number): Observable<PagedResponse<StudyViewModel>> {
@@ -30,17 +36,25 @@ export class ExperimentService {
     })
   }
 
-  addAllToExperiment(experimentId: number, searchString: string = '', studyType?: StudyType): Observable<PagedResponse<StudyViewModel>> {
+  addAllToExperiment(experimentId: number, searchString: string = '', studyType?: StudyType, modality?: string): Observable<PagedResponse<StudyViewModel>> {
     return this.http.post<PagedResponse<StudyViewModel>>(this.baseUrl + '/all-studies', {
       id: experimentId,
       searchString,
-      studyType
+      studyType,
+      modality: modality || ''
     })
   }
 
-  getUnusedStudies(experimentId: number, pageIndex, pageSize, searchString: string='', studyType?:StudyType): Observable<PagedResponse<StudyViewModel>> {
+  getUnusedStudies(experimentId: number, pageIndex, pageSize, searchString: string='', studyType?:StudyType, modality?: string): Observable<PagedResponse<StudyViewModel>> {
     return this.http.get<PagedResponse<StudyViewModel>>(this.baseUrl + '/unused-studies',
-    { params: {id: experimentId.toString(), page: pageIndex.toString(), pageSize: pageSize.toString(), searchString: searchString || '', studyType: studyType || ''} })
+    { params: {
+      id: experimentId.toString(),
+      page: pageIndex.toString(),
+      pageSize: pageSize.toString(),
+      searchString: searchString || '',
+      studyType: studyType || '',
+      modality: modality || ''
+    }})
   }
 
   addNewExperiment(name: string, type: StudyType) {
@@ -61,5 +75,9 @@ export class ExperimentService {
 
   getResults(experimentId: number) {
     window.open(this.baseUrl + `/results?id=${experimentId}`);
+  }
+
+  getEvalStats(experimentId: number) {
+    return this.http.post<ExperimentStatsViewModel>(this.baseUrl + '/experiment-stats', {experimentId})
   }
 }
