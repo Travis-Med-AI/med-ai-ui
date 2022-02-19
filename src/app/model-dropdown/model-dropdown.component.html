@@ -1,0 +1,8 @@
+<mat-form-field>
+    <mat-label>Model</mat-label>
+    <mat-select [formControl]="modelFormControl">
+        <mat-option *ngFor="let model of _models" [value]="model.id">
+        {{model.image}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

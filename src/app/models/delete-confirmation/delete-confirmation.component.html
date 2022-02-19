@@ -1,0 +1,7 @@
+<h1>Delete Confirmation</h1>
+<h3>Are you sure you want to delete {{data.job.model.displayName}}?</h3>
+<h3>All associated evaluations will also be deleted.</h3>
+<div fxLayoutAlign="center center">
+  <button mat-button color="warn" (click)="confirm()">Confirm</button>
+  <button mat-button (click)="cancel()">Cancel</button>
+</div>

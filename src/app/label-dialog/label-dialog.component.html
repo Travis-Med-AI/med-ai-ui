@@ -1,0 +1,46 @@
+<div *ngIf="models$ | async as models">
+  <app-model-dropdown [models]="models" [modelFormControl]="modelFormControl">
+  </app-model-dropdown>
+  <div *ngIf="selectedModel">
+    <input type="file" class="file-input"
+    (change)="onFileSelected($event)" #fileUpload>
+    <div class="file-upload">
+      {{fileName || "No file uploaded yet."}}
+      <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="selectedModel && csv">
+    <button mat-button (click)="onSave()">Save</button>
+  </div>
+</div>
+
+<div *ngIf="selectedModel && fileSize < maxFileSize">
+  <div *ngIf="labels">
+    <div>
+      Matching Series Found In DB: {{fileStats.idsFound}}
+    </div>
+    <div *ngFor="let k of fileStats.keysFound">
+      {{k.key}} : {{k.count}}
+    </div>
+    <div *ngFor="let k of keyBreakdown">{{k.key}} : {{k.count}}</div>
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+    <table class="preview-table">
+      <tr>
+        <th>Series UID</th>
+        <th *ngFor="let key of selectedModel.outputKeys">{{key}}</th>
+      </tr>
+      <tr *cdkVirtualFor="let label of labels"
+          class="example-item">
+          <td>{{label['Series UID']}}</td>
+          <td *ngFor="let key of selectedModel.outputKeys">{{label[key]}}</td>
+      </tr>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</div>
+<div *ngIf="fileSize > maxFileSize">File too large to preview</div>
+
