@@ -1,31 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // **Be sure that you only ever include this mixin once!**
-@include mat-core();
+@include mat.core();
 @import 'component-themes.scss';
 
-$light-primary: mat-palette($mat-blue);
-$light-accent: mat-palette($mat-orange);
-$light-warn: mat-palette($mat-red);
-$light-theme: mat-light-theme( $light-primary, $light-accent, $light-warn);
-$light-background: mat-color($mat-light-theme-background, background);
+$light-primary: mat.define-palette(mat.$blue-palette);
+$light-accent: mat.define-palette(mat.$orange-palette);
+$light-warn: mat.define-palette(mat.$red-palette);
+$light-theme: mat.define-light-theme( $light-primary, $light-accent, $light-warn);
+$light-background: mat.get-color-from-palette(mat.$light-theme-background-palette, background);
 
-@include angular-material-theme($light-theme);
-@include custom-components-theme($light-theme, $light-background, mat-palette($mat-blue, 700));
+@include mat.all-component-themes($light-theme);
+@include custom-components-theme($light-theme, $light-background, mat.define-palette(mat.$blue-palette, 700));
 
-$dark-warn:    mat-palette($mat-deep-orange);
+$dark-warn:    mat.define-palette(mat.$deep-orange-palette);
 
 // Define a custom typography config that overrides the font-family as well as the
 // `headlines` and `body-1` levels.
-$custom-typography: mat-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: 'Roboto, monospace'
 );
 
@@ -34,32 +34,32 @@ $custom-typography: mat-typography-config(
 // CSS class whatever you want. In this example, any component inside of an element with
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
-  $dark-primary: mat-palette($mat-grey, 400, 100, 900);
-  $dark-accent:  mat-palette($mat-green, A500, A100, A700);
-  $dark-theme:   mat-dark-theme( $dark-primary, $dark-accent, $dark-warn);
-  $dark-backround: mat-color($dark-primary, darker);
+  $dark-primary: mat.define-palette(mat.$grey-palette, 400, 100, 900);
+  $dark-accent:  mat.define-palette(mat.$green-palette, A500, A100, A700);
+  $dark-theme:   mat.define-dark-theme( $dark-primary, $dark-accent, $dark-warn);
+  $dark-backround: mat.get-color-from-palette($dark-primary, darker);
 
-    @include angular-material-theme($dark-theme);
-    @include custom-components-theme($dark-theme, $dark-backround, mat-palette($mat-grey, 800, A100, A700));
+    @include mat.all-component-themes($dark-theme);
+    @include custom-components-theme($dark-theme, $dark-backround, mat.define-palette(mat.$grey-palette, 800, A100, A700));
 
     &.app-background {
-        background-color: mat-color($dark-primary, darker);
-        color: mat-color($mat-dark-theme-foreground, text);
+        background-color: mat.get-color-from-palette($dark-primary, darker);
+        color: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, text);
     }
 }
 
 .dark-blue-theme {
-  $dark-primary: mat-palette($mat-blue-grey, 800, 700, 900);
-  $dark-accent:  mat-palette($mat-teal, 400, 100, 900);
-  $dark-theme:   mat-dark-theme( $dark-primary, $dark-accent, $dark-warn);
-  $dark-backround: mat-color($dark-primary, default);
+  $dark-primary: mat.define-palette(mat.$blue-grey-palette, 800, 700, 900);
+  $dark-accent:  mat.define-palette(mat.$teal-palette, 400, 100, 900);
+  $dark-theme:   mat.define-dark-theme( $dark-primary, $dark-accent, $dark-warn);
+  $dark-backround: mat.get-color-from-palette($dark-primary, default);
 
-  @include angular-material-theme($dark-theme);
-  @include custom-components-theme($dark-theme, $dark-backround, mat-palette($mat-blue-grey, 800));
+  @include mat.all-component-themes($dark-theme);
+  @include custom-components-theme($dark-theme, $dark-backround, mat.define-palette(mat.$blue-grey-palette, 800));
 
   &.app-background {
-      background-color: mat-color($dark-primary, darker);
-      color: mat-color($mat-dark-theme-foreground, text);
+      background-color: mat.get-color-from-palette($dark-primary, darker);
+      color: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, text);
   }
 }
 

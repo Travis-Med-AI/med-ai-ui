@@ -1,4 +1,5 @@
+@use '~@angular/material' as mat;
 @mixin component-color($palette) {
-  background: mat-color($palette);
-  color: mat-color($palette, default-contrast);
+  background: mat.get-color-from-palette($palette);
+  color: mat.get-color-from-palette($palette, default-contrast);
 }

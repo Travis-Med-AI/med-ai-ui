@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 
 .job-table {
@@ -23,7 +23,7 @@
 }
 
 .active-card {
-  background-color: mat-color($mat-green, 600);
+  background-color: mat.get-color-from-palette(mat.$green-palette, 600);
 }
 
 .job-container {
@@ -31,13 +31,13 @@
 }
 
 .unpulled-card {
-  background-color: mat-color($mat-blue, 600);
+  background-color: mat.get-color-from-palette(mat.$blue-palette, 600);
 }
 
 .failed-card {
-  background-color: mat-color($mat-red, 600);
+  background-color: mat.get-color-from-palette(mat.$red-palette, 600);
 }
 
 .quickstart-card {
-  background-color: mat-color($mat-teal, 600);
+  background-color: mat.get-color-from-palette(mat.$teal-palette, 600);
 }

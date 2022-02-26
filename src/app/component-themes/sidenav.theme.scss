@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import './default.theme.scss';
 @mixin sidenav-component-theme($theme, $default) {
   // retrieve variables from theme
@@ -13,8 +13,8 @@
   .mat-drawer{
     // let's take mat-toolbar's default theme
     // ref: https://github.com/angular/material2/blob/88601fa51d581f538468a9b63890b0e285e519cb/src/lib/toolbar/_toolbar-theme.scss#L39
-    background-color: mat-color($background, app-bar);
-    color: mat-color($foreground, text);
+    background-color: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
 
     // now, mat-toolbar's colored themes
     &[color=default]{
@@ -34,8 +34,8 @@
   .mat-drawer-content{
     // let's take mat-toolbar's default theme
     // ref: https://github.com/angular/material2/blob/88601fa51d581f538468a9b63890b0e285e519cb/src/lib/toolbar/_toolbar-theme.scss#L39
-    background-color: mat-color($background, app-bar);
-    color: mat-color($foreground, text);
+    background-color: mat.get-color-from-palette($background, app-bar);
+    color: mat.get-color-from-palette($foreground, text);
 
     // now, mat-toolbar's colored themes
     &[color=default]{

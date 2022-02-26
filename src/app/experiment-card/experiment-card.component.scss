@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 .experiment-header {
   width: 100%;
@@ -33,15 +33,15 @@
 }
 
 .finished-card {
-  background-color: mat-color($mat-green, 100);
+  background-color: mat.get-color-from-palette(mat.$green-palette, 100);
 }
 
 .running-card {
-  background-color: mat-color($mat-blue, 100);
+  background-color: mat.get-color-from-palette(mat.$blue-palette, 100);
 }
 
 .failed-card {
-  background-color: mat-color($mat-red, 100);
+  background-color: mat.get-color-from-palette(mat.$red-palette, 100);
 }
 
 .full-width {
