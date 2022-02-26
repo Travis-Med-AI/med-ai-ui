@@ -19,13 +19,13 @@
 
     // now, mat-toolbar's colored themes
     &[color=primary]{
-      @include toolbar-color($primary);
+      @include component-color($primary);
     }
     &[color=accent]{
-      @include toolbar-color($accent);
+      @include component-color($accent);
     }
     &[color=warn]{
-      @include toolbar-color($warn);
+      @include component-color($warn);
     }
   }
 
@@ -37,13 +37,13 @@
 
     // now, mat-toolbar's colored themes
     &[color=primary]{
-      @include toolbar-color($primary);
+      @include component-color($primary);
     }
     &[color=accent]{
-      @include toolbar-color($accent);
+      @include component-color($accent);
     }
     &[color=warn]{
-      @include toolbar-color($warn);
+      @include component-color($warn);
     }
   }
 }

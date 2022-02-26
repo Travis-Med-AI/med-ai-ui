@@ -1,10 +1,12 @@
-<mat-drawer-container class="container">
+<mat-drawer-container class="container app-background">
   <mat-drawer mode="side"
               #treeDrawer
               opened
               position="start"
               class="tree-drawer">
-    <app-study-sidebar (studiesSelected)="updateSelectedStudies($event)" [experiments]="experiments" class="sidenav"></app-study-sidebar>
+    <app-study-sidebar (studiesSelected)="updateSelectedStudies($event)" 
+                       [experiments]="experiments" 
+                       class="sidenav"></app-study-sidebar>
   </mat-drawer>
   <mat-drawer-content>
     <button color="primary"

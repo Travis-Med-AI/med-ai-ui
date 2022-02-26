@@ -48,10 +48,10 @@ export class ExperimentCardComponent implements OnInit {
 
   drop(item: CdkDragDrop<StudyViewModel[], StudyViewModel>) {
     let ids = concat(this.selectedStudies, [item.item.data.id])
-    if (this.experiment.type != item.item.data.type) {
-      this.notificationService.showNotification(`Experiment can only take type:${this.experiment.type}`)
-      return
-    }
+    // if (this.experiment.type != item.item.data.type) {
+    //   this.notificationService.showNotification(`Experiment can only take type:${this.experiment.type}`)
+    //   return
+    // }
     this.experimentService.addStudiesToExperiment(ids, this.experiment.id).subscribe(s => this.studies = s.payload)
   }
 

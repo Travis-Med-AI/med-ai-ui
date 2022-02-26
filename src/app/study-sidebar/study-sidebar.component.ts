@@ -18,7 +18,7 @@ export class StudySidebarComponent implements OnInit {
 
   studyTypes = Object.values(StudyType)
 
-  modalities = ['CT', 'MR']
+  modalities = ['CT', 'MR', 'CR', 'DX']
 
   experimentFilterControl = new FormControl();
   studyTypeControl = new FormControl();
