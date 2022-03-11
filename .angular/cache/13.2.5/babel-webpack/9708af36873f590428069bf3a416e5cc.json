@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { __decorate } from \"tslib\";\nimport { Input } from '@angular/core';\nexport class TableComponent {\n  constructor() {}\n\n  ngOnInit() {}\n\n}\n\n__decorate([Input()], TableComponent.prototype, \"columns\", void 0);","map":null,"metadata":{},"sourceType":"module"}

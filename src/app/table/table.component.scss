@@ -1,0 +1,32 @@
+
+.styled-table {
+    border-collapse: separate;
+    margin: 25px 0;
+    font-size: 1em;
+    font-family: sans-serif;
+    min-width: 75%;
+    border-radius: 10px;
+    border-spacing: 0;
+}
+
+.styled-table thead tr {
+    text-align: left;
+    border-radius: 10px;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    padding-top: 5px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}

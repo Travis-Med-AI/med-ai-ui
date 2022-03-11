@@ -1,0 +1,24 @@
+<mat-card class="component-background study-card">
+    <mat-card-title >
+        {{study.orthancStudyId}}
+    </mat-card-title>
+    <mat-card-subtitle>
+        {{study.type}}
+    </mat-card-subtitle>
+    <mat-card-content *ngIf="models">
+        <app-model-dropdown 
+            [modelFormControl]="modelControl" 
+            [models]="models" 
+            [studyType]="study.type">
+        </app-model-dropdown>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions fxLayoutAlign="center">
+        <button mat-button type="submit" (click)="startEval(study)">
+            <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-button type="submit" (click)="deleteStudy(study)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,12 @@
+<table class="styled-table mat-elevation-z2">
+    <thead>
+        <tr>
+            <th *ngFor="let col of columns">{{col.name}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let element of data" (click)="onClick(element)">
+            <td *ngFor="let col of columns">{{col.selector(element)}}</td>
+        </tr>
+    </tbody>
+</table>
