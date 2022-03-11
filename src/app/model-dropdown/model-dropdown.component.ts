@@ -17,7 +17,7 @@ export class ModelDropdownComponent implements OnInit {
     }
   };
   @Input() modelFormControl: FormControl;
-  @Input() studyType?: StudyType;
+  @Input() studyType: StudyType;
 
   filterModels = (models: ModelManifestItem[]) => {
 

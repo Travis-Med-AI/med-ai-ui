@@ -3,16 +3,16 @@
               #treeDrawer
               opened
               position="start"
-              class="tree-drawer">
+              class="tree-drawer app-background">
     <app-study-sidebar (studiesSelected)="updateSelectedStudies($event)" 
                        [experiments]="experiments" 
-                       class="sidenav"></app-study-sidebar>
+                       class="sidenav app-background"></app-study-sidebar>
   </mat-drawer>
   <mat-drawer-content>
     <button color="primary"
     fxLayoutAlign="center center"
     (click)="treeDrawer.toggle()"
-    class="expand-button mat-elevation-z8 mat-ripple">
+    class="expand-button mat-elevation-z8 mat-ripple app-background">
       <mat-icon>{{treeDrawer.opened? 'navigate_before': 'navigate_next'}}</mat-icon>
     </button>
     <div class="content">

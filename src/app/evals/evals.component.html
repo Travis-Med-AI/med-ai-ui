@@ -7,49 +7,9 @@
       </mat-form-field>
     </div>
   </div>
-  <ngx-masonry
-    class="container"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollUpDistance]="1.5"
-    (scrolled)="onScrollDown()"
-    (scrolledUp)="onScrollUp()"
-    [options]="masonryConfig"
-    [ordered]="true"
-    >
-    <mat-card ngxMasonryItem *ngFor="let eval of evals" class="item">
-      <mat-card-header >
-        <div mat-card-avatar fxLayoutAlign="center center">
-          <div class="clickable" *ngIf="!!eval.imgOutputPath" (click)="openImageDialog(eval.id)">
-            <img class="avatar"  [src]="evalService.getOutputImageUrl(eval.id)" (load)="imgLoad()"/>
-          </div>
-          <div mat-fab class="avatar" *ngIf="!eval.imgOutputPath" fxLayoutAlign="center center" [matTooltip]="eval.status">
-            <mat-icon *ngIf="eval.status === 'COMPLETED'" color="primary">check_box</mat-icon>
-            <mat-icon *ngIf="eval.status === 'RUNNING'" color="accent">refresh</mat-icon>
-            <mat-icon *ngIf="eval.status === 'FAILED'" color="warn">cancel</mat-icon>
-          </div>
-        </div>
-        <mat-card-title
-          [matTooltip]="eval.study.seriesUid">{{(eval.study.seriesUid.length>15)? (eval.study.seriesUid | slice:0:15)+'...':(eval.study.seriesUid)}}</mat-card-title>
-        <mat-card-subtitle>Diagnosis: {{eval.modelOutput? eval.modelOutput.display: 'TBD'}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content *ngIf="eval.id === visibleEval">
-        <div class="class-probs">
-          <h3>Class Probabilities</h3>
-          <div *ngFor="let item of eval.modelOutput.class_probabilities | keyvalue" fxLayoutAlign="space-between">
-            <span>{{item.key}}</span>
-            <span>{{item.value | number}}</span>
-          </div>
-        </div>
-      </mat-card-content>
-      <mat-card-actions fxLayoutAlign="center">
-        <button mat-button *ngIf="eval.id != visibleEval && eval.modelOutput" (click)="setEvalVisible(eval.id)">See More</button>
-        <button mat-button *ngIf="eval.id === visibleEval" (click)="setEvalVisible(-1)">See Less</button>
-        <button mat-button (click)="viewLogs(eval)">View Log</button>
-        <button mat-button (click)="deleteEval(eval.id)" color="warn">Delete</button>
-      </mat-card-actions>
-    </mat-card>
-  </ngx-masonry>
+  <div>
+    <app-table [columns]="columns" [data]="evals" [onClick]="onClick"></app-table>
+  </div>
 </div>
 
 

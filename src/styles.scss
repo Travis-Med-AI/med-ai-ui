@@ -1,65 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
+@use 'app/experiment-card/experiment-card-theme.scss' as exp-card;
+@use 'app/models/models-theme.scss' as models;
+@use 'app/table/table-theme.scss' as table;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// Plus imports for other components in your app.
+.custom-dialog-container .mat-dialog-container {
+  padding: 0;
+}
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// **Be sure that you only ever include this mixin once!**
+// custom theming 
 @include mat.core();
-@import 'component-themes.scss';
 
 $light-primary: mat.define-palette(mat.$blue-palette);
 $light-accent: mat.define-palette(mat.$orange-palette);
+$light-success: mat.define-palette(mat.$orange-palette);
 $light-warn: mat.define-palette(mat.$red-palette);
-$light-theme: mat.define-light-theme( $light-primary, $light-accent, $light-warn);
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $light-primary,
+    accent: $light-accent,
+    success :$light-success,
+    warn: $light-warn,
+  )
+));
 $light-background: mat.get-color-from-palette(mat.$light-theme-background-palette, background);
 
+@include mat.core-theme($light-theme);
 @include mat.all-component-themes($light-theme);
-@include custom-components-theme($light-theme, $light-background, mat.define-palette(mat.$blue-palette, 700));
+@include exp-card.theme($light-theme);
+@include models.theme($light-theme);
+@include table.theme($light-theme);
 
-$dark-warn:    mat.define-palette(mat.$deep-orange-palette);
+// .dark-blue-theme {
+//   $dark-primary: mat.define-palette(mat.$blue-grey-palette, 800, 700, 900);
+//   $dark-accent:  mat.define-palette(mat.$teal-palette, 400, 100, 900);
+//   $dark-success:  mat.define-palette(mat.$teal-palette, 400, 100, 900);
+//   $dark-warn: mat.define-palette(mat.$amber-palette);
+//   $dark-background: mat.get-color-from-palette($dark-primary, 900);
+//   $dark-foreground: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, text);
 
-// Define a custom typography config that overrides the font-family as well as the
-// `headlines` and `body-1` levels.
-$custom-typography: mat.define-typography-config(
-  $font-family: 'Roboto, monospace'
-);
+//   $dark-theme: mat.define-dark-theme((
+//     color: (
+//       primary: $dark-primary,
+//       accent: $dark-accent,
+//       warn: $dark-warn,
+//       success :$dark-success,
+//     ),
+//   ));
+//   $dark-backround: mat.get-color-from-palette($dark-primary, default);
 
-// @include angular-material-theme($dark-theme);
-// Include the dark color styles inside of a block with a CSS class. You can make this
-// CSS class whatever you want. In this example, any component inside of an element with
-// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
-.dark-theme {
-  $dark-primary: mat.define-palette(mat.$grey-palette, 400, 100, 900);
-  $dark-accent:  mat.define-palette(mat.$green-palette, A500, A100, A700);
-  $dark-theme:   mat.define-dark-theme( $dark-primary, $dark-accent, $dark-warn);
-  $dark-backround: mat.get-color-from-palette($dark-primary, darker);
+//   @include mat.core-theme($dark-theme);
+//   @include mat.all-component-themes($dark-theme);
 
-    @include mat.all-component-themes($dark-theme);
-    @include custom-components-theme($dark-theme, $dark-backround, mat.define-palette(mat.$grey-palette, 800, A100, A700));
+//   .app-background {
+//     background-color: $dark-background;
+//     color: $dark-foreground;
+//   }
 
-    &.app-background {
-        background-color: mat.get-color-from-palette($dark-primary, darker);
-        color: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, text);
-    }
-}
+//   .component-background {
+//     background-color: mat.get-color-from-palette($dark-primary, 800);
+//     color: $dark-foreground;
+//   }
+//   @include exp-card.theme($dark-theme);
+//   @include models.theme($dark-theme);
+//   @include table.theme($dark-theme);
 
-.dark-blue-theme {
-  $dark-primary: mat.define-palette(mat.$blue-grey-palette, 800, 700, 900);
-  $dark-accent:  mat.define-palette(mat.$teal-palette, 400, 100, 900);
-  $dark-theme:   mat.define-dark-theme( $dark-primary, $dark-accent, $dark-warn);
-  $dark-backround: mat.get-color-from-palette($dark-primary, default);
-
-  @include mat.all-component-themes($dark-theme);
-  @include custom-components-theme($dark-theme, $dark-backround, mat.define-palette(mat.$blue-grey-palette, 800));
-
-  &.app-background {
-      background-color: mat.get-color-from-palette($dark-primary, darker);
-      color: mat.get-color-from-palette(mat.$dark-theme-foreground-palette, text);
-  }
-}
-
+// }

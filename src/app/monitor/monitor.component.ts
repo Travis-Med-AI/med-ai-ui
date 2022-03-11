@@ -29,7 +29,7 @@ export class MonitorComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.notifier.next()
+    this.notifier.next(null)
     this.notifier.complete()
   }
 }

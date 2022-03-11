@@ -1,5 +1,3 @@
-@use '~@angular/material' as mat;
-
 .experiment-header {
   width: 100%;
   cursor: pointer;
@@ -30,18 +28,6 @@
 .experiment-studies-container {
   max-height: 8rem;
   overflow-y: auto;
-}
-
-.finished-card {
-  background-color: mat.get-color-from-palette(mat.$green-palette, 100);
-}
-
-.running-card {
-  background-color: mat.get-color-from-palette(mat.$blue-palette, 100);
-}
-
-.failed-card {
-  background-color: mat.get-color-from-palette(mat.$red-palette, 100);
 }
 
 .full-width {

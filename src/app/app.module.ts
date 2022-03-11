@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
-import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,11 +29,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatDividerModule} from '@angular/material/divider';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NewJobComponent } from './studies/studies.component';
+import { StudiesComponent } from './studies/studies.component';
 import { RegisterModelComponent } from './register-model/register-model.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -53,16 +53,18 @@ import { NotificationDialogComponent } from './notification-dialog/notification-
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StdoutDialogComponent } from './evals/stdout-dialog/stdout-dialog.component';
 import { NgxMasonryModule } from 'ngx-masonry';
-import { EvalImageDialogComponent } from './evals/eval-image-dialog/eval-image-dialog.component';
+import { EvalDialogComponent } from './evals/eval-dialog/eval-dialog.component';
 import { ExperimentsComponent } from './experiments/experiments.component';
 import { NewExperimentComponent } from './new-experiment/new-experiment.component';
 import { ExperimentCardComponent } from './experiment-card/experiment-card.component';
 import { StudySidebarComponent } from './study-sidebar/study-sidebar.component';
 import { environment } from '../environments/environment';
 import { LabelDialogComponent } from './label-dialog/label-dialog.component';
-import { NgxCsvParserModule } from 'ngx-csv-parser';
 import { ModelDropdownComponent } from './model-dropdown/model-dropdown.component';
 import { ExperimentAnalysisComponent } from './experiment-anaylsis/experiment-analysis.component';
+import { RouterModule } from '@angular/router';
+import { StudyCardComponent } from './study-card/study-card.component';
+import { TableComponent } from './table/table.component';
 
 const config: SocketIoConfig = { url: environment.API_URL}
 
@@ -86,7 +88,8 @@ const materialModules = [
   MatButtonModule,
   MatInputModule,
   MatBadgeModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatDividerModule
 ]
 
 @NgModule({
@@ -94,7 +97,7 @@ const materialModules = [
         AppComponent,
         SidenavComponent,
         LandingComponent,
-        NewJobComponent,
+        StudiesComponent,
         RegisterModelComponent,
         ModelsComponent,
         EvalsComponent,
@@ -106,7 +109,7 @@ const materialModules = [
         DeleteConfirmationComponent,
         NotificationDialogComponent,
         StdoutDialogComponent,
-        EvalImageDialogComponent,
+        EvalDialogComponent,
         ExperimentsComponent,
         NewExperimentComponent,
         ExperimentCardComponent,
@@ -114,15 +117,18 @@ const materialModules = [
         LabelDialogComponent,
         ModelDropdownComponent,
         ExperimentAnalysisComponent,
+        StudyCardComponent,
+        TableComponent,
     ],
     imports: [
         BrowserModule,
         SocketIoModule.forRoot(config),
+        ...materialModules,
         InfiniteScrollModule,
         NgxMasonryModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        DeviceDetectorModule,
+        RouterModule,
         HttpClientModule,
         FlexLayoutModule,
         MatSelectModule,
@@ -132,8 +138,6 @@ const materialModules = [
         CdkScrollableModule,
         ScrollingModule,
         DragDropModule,
-        NgxCsvParserModule,
-        ...materialModules
     ],
     providers: [],
     bootstrap: [AppComponent]

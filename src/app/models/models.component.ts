@@ -76,7 +76,14 @@ export class ModelsComponent implements OnInit {
   toggleQuickstart(model: any) {
     this.modelSerivce.toggleQuickstart(model.id).subscribe(j => {
       this.getJobs()
-      this.notificationService.showNotification('Successfully toggle job')
+      this.notificationService.showNotification('Successfully toggled job quickstart')
+    })
+  }
+
+  toggleCpu(model: any) {
+    this.jobService.toggleCpu(model.id).subscribe(j => {
+      this.getJobs()
+      this.notificationService.showNotification('Successfully toggled job quickstart')
     })
   }
 

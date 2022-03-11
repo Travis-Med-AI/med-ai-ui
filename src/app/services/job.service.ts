@@ -25,4 +25,8 @@ export class JobService {
   killJob(id: number): Observable<EvalJobViewModel> {
     return this.http.post<EvalJobViewModel>(`${this.baseUrl}/kill`, {id})
   }
+
+  toggleCpu(id: number): Observable<EvalJobViewModel> {
+    return this.http.post<EvalJobViewModel>(`${this.baseUrl}/cpu`, {id})
+  }
 }

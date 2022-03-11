@@ -6,19 +6,19 @@
 </div>
 <div *ngIf="jobs" fxLayout="row wrap" class="job-container" fxLayoutAlign="center">
   <mat-card *ngFor="let job of jobs"
-            class="job-card"
-            [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed, 'quickstart-card': job.model.quickstart }"
+            class="job-card component-background"
             fxLayout="column">
 
     {{job.model.displayName}}
     <div *ngIf="job.model.pulled && !job.model.failed" fxLayoutAlign="center center">
       <div>
-        <button mat-button>Info</button>
         <button mat-button (click)="toggleJob(job.id, job.running)">Turn {{job.running? 'Off': 'On'}}</button>
       </div>
       <div>
-        <button mat-button (click)="setAsClassifier(job.model)">Use as {{job.model.modality}} classifier</button>
-        <button mat-button (click)="toggleQuickstart(job.model)">Quickstart</button>
+        <button mat-button (click)="toggleQuickstart(job.model)">{{job.model.quickstart ? 'Quickstarted': 'Quickstart'}}</button>
+      </div>
+      <div>
+        <button mat-button (click)="toggleCpu(job.model)">CPU {{job.cpu? 'On': 'Off'}}</button>
       </div>
     </div>
     <div *ngIf="job.model.failed"> Download Failed </div>
@@ -29,5 +29,9 @@
     <div>
       <button mat-button (click)="deleteJob(job)">Delete Model</button>
     </div>
+    <mat-card-footer class="footer"
+                     [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failed, 'quickstart-card': job.model.quickstart }">
+
+    </mat-card-footer>
   </mat-card>
 </div>

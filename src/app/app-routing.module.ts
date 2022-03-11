@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
-import { NewJobComponent } from './studies/studies.component';
+import { StudiesComponent } from './studies/studies.component';
 import { RegisterModelComponent } from './register-model/register-model.component';
 import { ModelsComponent } from './models/models.component';
 import { EvalsComponent } from './evals/evals.component';
@@ -15,7 +15,7 @@ import { ExperimentsComponent } from './experiments/experiments.component';
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'evaluate-study', component: EvaluateStudyComponent },
-  { path: 'new-job', component: NewJobComponent },
+  { path: 'new-job', component: StudiesComponent },
   { path: 'register-model', component: RegisterModelComponent },
   { path: 'jobs', component: ModelsComponent },
   { path: 'evals', component: EvalsComponent },

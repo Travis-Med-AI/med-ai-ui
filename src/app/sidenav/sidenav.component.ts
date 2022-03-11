@@ -20,11 +20,10 @@ interface sideNavItem {
 export class SidenavComponent implements OnInit {
   notifications: NotificationMessage[] = []
   sidenavItems: sideNavItem[] = [
-    {icon: 'insert_drive_file', routerLink: 'new-job', displayValue: 'Studies'},
-    // {icon: 'model_training', routerLink: 'evaluate-study', displayValue: 'Evaluate'},
-    {icon: 'model_training', routerLink: 'experiments', displayValue: 'Experiments'},
     {icon: 'add_to_queue', routerLink: 'jobs', displayValue: 'Models'},
-    {icon: 'leaderboard', routerLink: 'evals', displayValue: 'Evals'},
+    {icon: 'leaderboard', routerLink: 'evals', displayValue: 'Results'},
+    {icon: 'model_training', routerLink: 'experiments', displayValue: 'Experiments'},
+    // {icon: 'insert_drive_file', routerLink: 'new-job', displayValue: 'Studies'},
     {icon: 'memory', routerLink: 'monitor', displayValue: 'Monitor'},
     {icon: 'image', routerLink: 'orthanc', displayValue: 'Orthanc'},
     {icon: 'settings', routerLink: 'settings', displayValue: 'Settings'},

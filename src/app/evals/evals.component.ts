@@ -12,8 +12,11 @@ import { StudyService } from '../services/study.service';
 import { NgxMasonryOptions, NgxMasonryComponent } from 'ngx-masonry';
 import { MatDialog } from '@angular/material/dialog';
 import { StdoutDialogComponent } from './stdout-dialog/stdout-dialog.component';
-import { EvalImageDialogComponent } from './eval-image-dialog/eval-image-dialog.component';
+import { EvalDialogComponent } from './eval-dialog/eval-dialog.component';
 import { debounce } from 'lodash';
+import { TableColumn } from '../table/table.component';
+
+
 
 @Component({
   selector: 'app-evals',
@@ -29,17 +32,34 @@ export class EvalsComponent implements OnInit {
   pageSize = 10;
   evalIdChange = new Subject();
   visibleEval: number;
-  masonryConfig: NgxMasonryOptions = {
-    // gutter: 1,
-    fitWidth: true,
-    horizontalOrder:true
-  }
 
-  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
+  onClick = (e: StudyEvalVM) => this.dialog.open(EvalDialogComponent, {
+    maxWidth: '75vw',
+    data: e,
+    panelClass: 'custom-dialog-container'
+  })
+
+  columns:TableColumn<StudyEvalVM>[] = [
+    {
+      name: 'Study Id',
+      selector: (e) => e.orthancId
+    },
+    {
+      name: 'Status',
+      selector: (e) => e.status
+    },
+    {
+      name: 'Output',
+      selector: (e) => e.modelOutput? e.modelOutput.display: 'TBD'
+    },
+    {
+      name: 'Model',
+      selector: (e) => e.model? e.model.displayName: 'TBD'
+    }
+  ]
 
   constructor(public evalService: EvalService,
               private notficiationService: NotificationService,
-              private deviceService: DeviceDetectorService,
               public studyService: StudyService,
               private dialog: MatDialog) { }
 
@@ -56,8 +76,6 @@ export class EvalsComponent implements OnInit {
     console.log(`requesting evals for page ${this.pageIndex} with size ${this.totalVisible}`)
     this.evalService.getEvals(this.pageIndex, this.totalVisible, this.searchControl.value).subscribe(res => {
       this.evals = res.payload
-      this.masonry.reloadItems();
-      this.masonry.layout();
     })
   }
 
@@ -65,13 +83,7 @@ export class EvalsComponent implements OnInit {
     this.evalService.getOutputImage(id);
   }
 
-  deleteEval(evalId: number) {
-    this.evalService.deleteEval(evalId)
-    .subscribe( r => {
-      this.fetchEvals()
-      this.notficiationService.showNotification('successfully deleted eval')
-    })
-  }
+
 
   onScrollUp() {
 
@@ -95,17 +107,14 @@ export class EvalsComponent implements OnInit {
 
   setEvalVisible(id: number) {
     this.visibleEval = id;
-    this.masonry.layout();
   }
 
   imgLoad() {
-    this.masonry.reloadItems();
-    this.masonry.layout();
   }
 
   openImageDialog(evalId: number) {
     let src = this.evalService.getOutputImageUrl(evalId)
-    const dialogRef = this.dialog.open(EvalImageDialogComponent, {
+    const dialogRef = this.dialog.open(EvalDialogComponent, {
       data: src,
       height: '50vh'
     });

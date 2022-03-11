@@ -1,8 +1,8 @@
-<mat-sidenav-container [ngClass]="theme" class="app-background mat-typography" fxFlexFill>
-  <mat-sidenav #sidenav mode="side" [opened]="!isMobile" color="default">
+<mat-sidenav-container [ngClass]="theme" class="mat-typography" fxFlexFill>
+  <mat-sidenav #sidenav mode="side" [opened]="!isMobile" class="app-background">
     <app-sidehav></app-sidehav>
   </mat-sidenav>
-  <mat-sidenav-content class="content">
+  <mat-sidenav-content class="content" class="app-background">
     <div class="menu-icon"  *ngIf="isMobile">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </div>
