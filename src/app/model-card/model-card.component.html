@@ -1,0 +1,31 @@
+<mat-card class="job-card component-background"
+          fxLayout="column">
+
+    {{job.model.displayName}}
+    <div *ngIf="job.model.pulled && !job.model.failedPull" fxLayoutAlign="center center">
+        <div>
+        <button mat-button (click)="toggleJob(job.id, job.running)">Turn {{job.running? 'Off': 'On'}}</button>
+        </div>
+        <div>
+        <mat-form-field appearance="fill" class="replica-input">
+            <mat-label>Replicas</mat-label>
+            <input matInput type="number" [formControl]="replicasControl" placeholder="No. Replicas" [(ngModel)]="job.replicas" >
+        </mat-form-field>
+        </div>
+        <div>
+        <button mat-button (click)="toggleCpu(job)">CPU {{job.cpu? 'On': 'Off'}}</button>
+        </div>
+    </div>
+    <div *ngIf="job.model.failedPull"> Download Failed </div>
+    <div *ngIf="!job.model.pulled && !job.model.failedPull"> Downloading...</div>
+    <div *ngIf="!job.model.pulled || job.model.failedPull">
+        <button mat-button (click)="retry(job.model.image)">Retry Download</button>
+    </div>
+    <div>
+        <button mat-button (click)="deleteJob(job)">Delete Model</button>
+    </div>
+    <mat-card-footer class="footer"
+                        [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failedPull, 'quickstart-card': job.replicas > 0 }">
+
+    </mat-card-footer>
+</mat-card>

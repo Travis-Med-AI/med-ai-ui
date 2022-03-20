@@ -29,4 +29,8 @@ export class JobService {
   toggleCpu(id: number): Observable<EvalJobViewModel> {
     return this.http.post<EvalJobViewModel>(`${this.baseUrl}/cpu`, {id})
   }
+
+  updateReplicas(id: number, replicas: number): Observable<{updated: number}> {
+    return this.http.post<{updated: number}>(`${this.baseUrl}/replicas`, {id, replicas})
+  }
 }

@@ -8,6 +8,7 @@ import { ModelService } from '../services/model.service';
 import { startWith, switchMap } from 'rxjs/operators';
 import { EvalJobViewModel, Notifications } from 'med-ai-common';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-models',
@@ -35,56 +36,9 @@ export class ModelsComponent implements OnInit {
     this.dialog.afterAllClosed.subscribe(_ => this.getJobs())
   }
 
-  toggleJob(id:number, running:boolean) {
-    if (running) {
-      this.jobService.killJob(id).subscribe(j => {
-        this.getJobs()
-        this.notificationService.showNotification('Successfully turned job off')
-      })
-    } else {
-      this.jobService.startJob(id).subscribe(j => {
-        this.getJobs()
-        this.notificationService.showNotification('Successfully turned job on')
-      })
-    }
-  }
-
   getJobs() {
     this.jobService.getJobs().subscribe(j => this.jobs = j)
   }
 
-  retry(image: string) {
-    this.modelSerivce.retryModel(image).subscribe(i => {
-      this.jobService.getJobs();
-      this.notificationService.showNotification('Successfully downloaded')
-    })
-  }
-
-  setAsClassifier(model: any) {
-    this.modelSerivce.setClassifier(model.image, model.modality).subscribe(res => {
-      this.notificationService.showNotification(`Set ${model.displayName} as classifer for ${model.modality}`)
-    })
-  }
-
-  deleteJob(job:EvalJobViewModel) {
-    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
-      data: {job}
-    });
-    dialogRef.afterClosed().subscribe(result => this.jobService.getJobs())
-  }
-
-  toggleQuickstart(model: any) {
-    this.modelSerivce.toggleQuickstart(model.id).subscribe(j => {
-      this.getJobs()
-      this.notificationService.showNotification('Successfully toggled job quickstart')
-    })
-  }
-
-  toggleCpu(model: any) {
-    this.jobService.toggleCpu(model.id).subscribe(j => {
-      this.getJobs()
-      this.notificationService.showNotification('Successfully toggled job quickstart')
-    })
-  }
 
 }

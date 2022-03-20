@@ -65,6 +65,7 @@ import { ExperimentAnalysisComponent } from './experiment-anaylsis/experiment-an
 import { RouterModule } from '@angular/router';
 import { StudyCardComponent } from './study-card/study-card.component';
 import { TableComponent } from './table/table.component';
+import { ModelCardComponent } from './model-card/model-card.component';
 
 const config: SocketIoConfig = { url: environment.API_URL}
 
@@ -119,6 +120,7 @@ const materialModules = [
         ExperimentAnalysisComponent,
         StudyCardComponent,
         TableComponent,
+        ModelCardComponent,
     ],
     imports: [
         BrowserModule,
