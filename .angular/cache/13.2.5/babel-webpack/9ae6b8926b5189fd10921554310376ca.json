@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class TableComponent {\n  constructor() {}\n\n  ngOnInit() {}\n\n}","map":null,"metadata":{},"sourceType":"module"}
