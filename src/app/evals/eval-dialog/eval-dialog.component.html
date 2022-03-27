@@ -3,7 +3,7 @@
     <mat-card-title [matTooltip]="data.study.seriesUid">{{(data.study.seriesUid.length>15)? 
                                                             (data.study.seriesUid | slice:0:15)+'...':
                                                             (data.study.seriesUid)}}</mat-card-title>
-    <img mat-card-image [src]="evalService.getOutputImageUrl(data.id)" (load)="imgLoad()" alt="No Photo">
+    <img mat-card-image [src]="evalService.getOutputImageUrl(data)" (load)="imgLoad()" alt="No Photo">
     <mat-card-content>
         <h4>Class Probabilities</h4>
         <div class="class-probs">

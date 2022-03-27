@@ -4,6 +4,6 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<div *ngIf="jobs" fxLayout="row wrap" class="job-container" fxLayoutAlign="center">
-  <app-model-card *ngFor="let job of jobs" [job]="job" (onUpdate)="getJobs()"></app-model-card>
+<div *ngIf="jobs" fxLayout="column" fxLayoutAlign=" center" >
+  <app-model-card class="model-card" *ngFor="let job of jobs" [job]="job" (onUpdate)="getJobs()"></app-model-card>
 </div>

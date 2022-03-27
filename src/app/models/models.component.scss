@@ -1,36 +1,6 @@
 @use '@angular/material' as mat;
 
-
-.job-table {
-  width: 100%
+.model-card {
+  width: 50rem;
+  margin-top: 0.5rem;
 }
-
-.job-card {
-  display:flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 20rem;
-  opacity: 0.8;
-  cursor: pointer;
-  height: 10rem;
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
-}
-
-.inactive-card {
-  opacity: 0.5;
-}
-
-.active-card {
-  background-color: mat.get-color-from-palette(mat.$green-palette, 600);
-}
-
-.job-container {
-  margin: 1rem;
-}
-
-.footer {
-  height: 10px;
-}
-

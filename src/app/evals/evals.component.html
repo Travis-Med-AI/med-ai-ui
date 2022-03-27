@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="top center">
+<div fxLayout="column" fxLayoutAlign="top center" class="container">
   <div fxLayout="row" fxLayoutAlign="space-around">
     <div class="search-bar">
       <mat-form-field  fxFill>
@@ -7,8 +7,24 @@
       </mat-form-field>
     </div>
   </div>
-  <div>
-    <app-table [columns]="columns" [data]="evals" [onClick]="onClick"></app-table>
+  <div class="listContainer">
+    <cdk-virtual-scroll-viewport #scroller class="content" itemSize="72">
+      <mat-list>
+        <ng-container *cdkVirtualFor="let e of evals">
+          <mat-list-item class="evaluation" (click)="onClick(e)">
+            <img matListAvatar [src]="evalService.getOutputImageUrl(e)">
+            <h3 matLine> {{e.orthancId}} </h3>
+            <p matLine>
+              <span> {{e.model? e.model.displayName: 'TBD'}} </span>
+            </p>
+            <span>
+              {{e.status}}
+            </span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </cdk-virtual-scroll-viewport>
   </div>
 </div>
 

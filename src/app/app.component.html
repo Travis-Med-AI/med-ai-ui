@@ -1,6 +1,6 @@
 <mat-sidenav-container [ngClass]="theme" class="mat-typography" fxFlexFill>
-  <mat-sidenav #sidenav mode="side" [opened]="!isMobile" class="app-background">
-    <app-sidehav></app-sidehav>
+  <mat-sidenav #sidenav mode="side" [opened]="!isMobile" class="app-background" >
+    <app-sidehav *ngIf="authService.loggedIn"></app-sidehav>
   </mat-sidenav>
   <mat-sidenav-content class="content" class="app-background">
     <div class="menu-icon"  *ngIf="isMobile">

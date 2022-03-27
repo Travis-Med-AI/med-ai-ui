@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ModelViewModel, ModelManifestItem, ClassifierViewModel } from 'med-ai-common';
+import { ModelViewModel, ModelManifestItem, ClassifierViewModel, Modality } from 'med-ai-common';
 import { SettingsService } from './settings.service';
 
 
@@ -44,6 +44,10 @@ export class ModelService {
 
   deleteModel(modelId: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${modelId}`)
+  }
+
+  setModality(modelId: number, modality: Modality): Observable<ModelViewModel> {
+    return this.http.post<ModelViewModel>(`${this.baseUrl}/modality`, {modelId, modality})
   }
 
 }

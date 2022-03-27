@@ -44,3 +44,24 @@
   overflow:auto;
 }
 
+
+.evaluation {
+  cursor: pointer;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1
+}
+
+.content {
+  flex-grow: 1;
+  width: 75vw;
+}
+
+.container {
+  height: 100vh;
+}

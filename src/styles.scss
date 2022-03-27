@@ -2,7 +2,7 @@
 @use '@angular/material' as mat;
 @use 'app/experiment-card/experiment-card-theme.scss' as exp-card;
 @use 'app/models/models-theme.scss' as models;
-@use 'app/table/table-theme.scss' as table;
+@use 'app/evals/table-theme.scss' as table;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -33,6 +33,7 @@ $light-background: mat.get-color-from-palette(mat.$light-theme-background-palett
 @include exp-card.theme($light-theme);
 @include models.theme($light-theme);
 @include table.theme($light-theme);
+
 
 // .dark-blue-theme {
 //   $dark-primary: mat.define-palette(mat.$blue-grey-palette, 800, 700, 900);

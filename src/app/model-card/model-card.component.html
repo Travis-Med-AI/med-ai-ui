@@ -1,31 +1,67 @@
-<mat-card class="job-card component-background"
+<!-- <mat-card class="job-card component-background"
           fxLayout="column">
 
     {{job.model.displayName}}
+
+    <mat-form-field appearance="fill" class="replica-input">
+        <mat-label>Replicas</mat-label>
+        <input matInput type="number" [formControl]="replicasControl" placeholder="No. Replicas" [(ngModel)]="job.replicas" >
+    </mat-form-field>
+    <button mat-button (click)="toggleCpu(job)">CPU {{job.cpu? 'On': 'Off'}}</button>
+
     <div *ngIf="job.model.pulled && !job.model.failedPull" fxLayoutAlign="center center">
         <div>
         <button mat-button (click)="toggleJob(job.id, job.running)">Turn {{job.running? 'Off': 'On'}}</button>
         </div>
         <div>
-        <mat-form-field appearance="fill" class="replica-input">
-            <mat-label>Replicas</mat-label>
-            <input matInput type="number" [formControl]="replicasControl" placeholder="No. Replicas" [(ngModel)]="job.replicas" >
-        </mat-form-field>
+        
         </div>
         <div>
-        <button mat-button (click)="toggleCpu(job)">CPU {{job.cpu? 'On': 'Off'}}</button>
         </div>
-    </div>
-    <div *ngIf="job.model.failedPull"> Download Failed </div>
-    <div *ngIf="!job.model.pulled && !job.model.failedPull"> Downloading...</div>
-    <div *ngIf="!job.model.pulled || job.model.failedPull">
-        <button mat-button (click)="retry(job.model.image)">Retry Download</button>
     </div>
     <div>
         <button mat-button (click)="deleteJob(job)">Delete Model</button>
     </div>
-    <mat-card-footer class="footer"
-                        [ngClass]="{'active-card': job.running , 'unpulled-card': !job.model.pulled, 'inactive-card': !job.running, 'failed-card': job.model.failedPull, 'quickstart-card': job.replicas > 0 }">
+</mat-card> -->
 
-    </mat-card-footer>
-</mat-card>
+<mat-expansion-panel class="model-card" [ngClass]="{'active-card': running}">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{job.model.displayName}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{job.model.modality}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+        <mat-grid-list cols="2" rowHeight="7:1">
+          <mat-grid-tile>Running</mat-grid-tile>
+          <mat-grid-tile>
+            <mat-slide-toggle [formControl]="runningControl"></mat-slide-toggle>
+          </mat-grid-tile>
+          <mat-grid-tile>CPU Only</mat-grid-tile>
+          <mat-grid-tile>
+            <mat-slide-toggle [formControl]="cpuControl"></mat-slide-toggle>
+          </mat-grid-tile>
+          <mat-grid-tile>Replicas</mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="fill" class="replica-input">
+              <mat-label>Replicas</mat-label>
+              <input matInput type="number" [formControl]="replicasControl" placeholder="No. Replicas" [(ngModel)]="job.replicas" >
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>Modality</mat-grid-tile>
+          <mat-grid-tile *ngIf="modalities$ | async as mo">
+            <mat-form-field>
+              <mat-label>Modality</mat-label>
+              <mat-select [formControl]="modalityControl">
+                <mat-option *ngFor="let m of mo.modalities" [value]="m">
+                  {{m}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>  
+        </mat-grid-list>
+        <button mat-button color="warn" class="delete-button" (click)="delete()">Delete Model</button>
+    </div>
+  </mat-expansion-panel>

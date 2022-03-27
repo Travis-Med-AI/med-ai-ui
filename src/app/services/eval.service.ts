@@ -48,8 +48,8 @@ export class EvalService {
     .catch(err => console.error("download error = ", err))
   }
 
-  getOutputImageUrl(evalId:number) {
-    return `${this.baseUrl}/output-image?evalId=${evalId}`;
+  getOutputImageUrl(evaluation:StudyEvalVM) {
+    return `${this.settingsSerivce.getServerUrl()}/images/${evaluation.imgOutputPath}`;
   }
 
   getLogSocket(evalId: number) {

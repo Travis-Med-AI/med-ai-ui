@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ThemeService, THEMES, THEMES_VALUES } from './services/theme.service';
 import { NotificationService } from './services/notification.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent {
   theme: string = THEMES_VALUES[THEMES.LIGHT];
   constructor(public themeService: ThemeService,
     public notificationService: NotificationService,
-    private deviceService: DeviceDetectorService) {
+    private deviceService: DeviceDetectorService,
+    public authService: AuthService) {
     this.themeService.theme.subscribe(theme => this.theme = THEMES_VALUES[theme]);
     this.notificationService.watchNewNotifications();
     this.isMobile = this.deviceService.isMobile();

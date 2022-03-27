@@ -31,6 +31,10 @@ export class StudyService {
     return this.http.delete<any>(`${this.baseUrl}/${studyId}`)
   }
 
+  getModalities(): Observable<{modalities: string[]}> {
+    return this.http.get<{modalities: string[]}>(`${this.baseUrl}/modalities`)
+  }
+
   checkForSeriesUID(file: File, modelId: number): Observable<csvVerification> {
     const formData = new FormData();
     formData.append("csv", file);

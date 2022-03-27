@@ -1,3 +1,17 @@
+@use '@angular/material' as mat;
+
 .replica-input {
     width: 4rem;
+}
+
+.model-card {
+    width: 50rem;
+}
+
+.active-card {
+    background-color: mat.get-color-from-palette(mat.$green-palette, 100);
+}
+
+.delete-button {
+    width: 100%
 }

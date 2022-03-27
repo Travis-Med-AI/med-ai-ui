@@ -27,17 +27,11 @@ import { TableColumn } from '../table/table.component';
 export class EvalsComponent implements OnInit {
   searchControl = new FormControl('');
   evals: StudyEvalVM[] = []
-  totalVisible = 30;
+  totalVisible = 50;
   pageIndex = 0;
-  pageSize = 10;
+  pageSize = 50;
   evalIdChange = new Subject();
   visibleEval: number;
-
-  onClick = (e: StudyEvalVM) => this.dialog.open(EvalDialogComponent, {
-    maxWidth: '75vw',
-    data: e,
-    panelClass: 'custom-dialog-container'
-  })
 
   columns:TableColumn<StudyEvalVM>[] = [
     {
@@ -83,10 +77,13 @@ export class EvalsComponent implements OnInit {
     this.evalService.getOutputImage(id);
   }
 
-
-
-  onScrollUp() {
-
+  onClick (e: StudyEvalVM) { 
+    let dialog = this.dialog.open(EvalDialogComponent, {
+      maxWidth: '75vw',
+      data: e,
+      panelClass: 'custom-dialog-container'
+    })
+    dialog.afterClosed().subscribe(f => this.fetchEvals())
   }
 
   onScrollDown() {
@@ -110,13 +107,5 @@ export class EvalsComponent implements OnInit {
   }
 
   imgLoad() {
-  }
-
-  openImageDialog(evalId: number) {
-    let src = this.evalService.getOutputImageUrl(evalId)
-    const dialogRef = this.dialog.open(EvalDialogComponent, {
-      data: src,
-      height: '50vh'
-    });
   }
 }

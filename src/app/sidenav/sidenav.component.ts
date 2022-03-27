@@ -5,6 +5,7 @@ import { NotificationService } from '../services/notification.service';
 import { NotificationMessage } from 'med-ai-common';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
+import { AuthService } from '../services/auth.service';
 
 interface sideNavItem {
   icon: string;
@@ -29,7 +30,9 @@ export class SidenavComponent implements OnInit {
     {icon: 'settings', routerLink: 'settings', displayValue: 'Settings'},
   ]
   isDark = false;
-  constructor(private notifService: NotificationService, private dialog: MatDialog) {
+  constructor(private notifService: NotificationService, 
+              private dialog: MatDialog,
+              private authService: AuthService) {
   }
 
   notifications$ = this.notifService.getNotifications();
@@ -49,5 +52,9 @@ export class SidenavComponent implements OnInit {
     const dialogRef = this.dialog.open(NotificationDialogComponent, {
       data: this.notifications
     });
+  }
+
+  logout() {
+    this.authService.logout()
   }
 }

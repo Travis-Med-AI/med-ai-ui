@@ -12,7 +12,7 @@ import { LandingComponent } from './landing/landing.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatTableModule } from '@angular/material/table'
@@ -30,7 +30,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -66,6 +68,9 @@ import { RouterModule } from '@angular/router';
 import { StudyCardComponent } from './study-card/study-card.component';
 import { TableComponent } from './table/table.component';
 import { ModelCardComponent } from './model-card/model-card.component';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { SignupComponent } from './signup/signup.component';
 
 const config: SocketIoConfig = { url: environment.API_URL}
 
@@ -90,7 +95,9 @@ const materialModules = [
   MatInputModule,
   MatBadgeModule,
   MatProgressBarModule,
-  MatDividerModule
+  MatDividerModule,
+  MatGridListModule,
+  MatListModule
 ]
 
 @NgModule({
@@ -121,6 +128,8 @@ const materialModules = [
         StudyCardComponent,
         TableComponent,
         ModelCardComponent,
+        LoginComponent,
+        SignupComponent,
     ],
     imports: [
         BrowserModule,
@@ -141,7 +150,7 @@ const materialModules = [
         ScrollingModule,
         DragDropModule,
     ],
-    providers: [],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

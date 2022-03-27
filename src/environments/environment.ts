@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   API_URL: 'http://192.168.49.2:8000',
-  ORTHANC_URL: 'http://192.168.49.2:8043'
+  ORTHANC_URL: 'http://192.168.49.2:8042'
 };
 
 /*
