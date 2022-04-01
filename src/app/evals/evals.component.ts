@@ -29,7 +29,7 @@ export class EvalsComponent implements OnInit {
   evals: StudyEvalVM[] = []
   totalVisible = 50;
   pageIndex = 0;
-  pageSize = 50;
+  pageSize = 1000;
   evalIdChange = new Subject();
   visibleEval: number;
 
