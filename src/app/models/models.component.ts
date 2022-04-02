@@ -18,7 +18,7 @@ import { FormControl } from '@angular/forms';
 export class ModelsComponent implements OnInit {
   jobs: EvalJobViewModel[] = []
   jobs$ = this.getJobs()
-  displayedColumns = ['name', 'lastRun', 'jobToggle']
+  displayedColumns = ['name', 'jobToggle']
 
   constructor(private jobService:JobService,
               private modelSerivce: ModelService,

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://192.168.10.2:8000',
-  ORTHANC_URL: 'http://192.168.10.3:8042'
+  API_URL: 'http://10.163.22.180:8000',
+  ORTHANC_URL: 'http://10.163.22.180:8042'
 };
 
 /*

@@ -27,7 +27,7 @@ import { TableColumn } from '../table/table.component';
 export class EvalsComponent implements OnInit {
   searchControl = new FormControl('');
   evals: StudyEvalVM[] = []
-  totalVisible = 50;
+  totalVisible = 1000;
   pageIndex = 0;
   pageSize = 1000;
   evalIdChange = new Subject();

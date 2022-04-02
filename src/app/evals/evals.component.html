@@ -13,12 +13,12 @@
         <ng-container *cdkVirtualFor="let e of evals">
           <mat-list-item class="evaluation" (click)="onClick(e)">
             <img matListAvatar [src]="evalService.getOutputImageUrl(e)">
-            <h3 matLine> {{e.orthancId}} </h3>
+            <h3 matLine> {{e.study.studyUid}} </h3>
             <p matLine>
               <span> {{e.model? e.model.displayName: 'TBD'}} </span>
             </p>
             <span>
-              {{e.status}}
+              {{e.status}} - {{e.modelOutput? e.modelOutput.display: 'Diagnosis TBD'}}
             </span>
             <mat-divider></mat-divider>
           </mat-list-item>

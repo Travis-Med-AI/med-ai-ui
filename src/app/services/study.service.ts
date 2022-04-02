@@ -49,4 +49,9 @@ export class StudyService {
     return this.http.post<csvVerification>(`${this.baseUrl}/save-labels`, formData)
   }
 
+  getOrthancUrl(orthancId: string): string {
+    let orthancBase = this.settingsService.getOrthancUrl();
+    return `${orthancBase}/app/explorer.html#series?uuid=${orthancId}`
+  }
+
 }
