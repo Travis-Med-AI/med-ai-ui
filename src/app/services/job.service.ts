@@ -30,6 +30,10 @@ export class JobService {
     return this.http.post<EvalJobViewModel>(`${this.baseUrl}/cpu`, {id})
   }
 
+  toggleDeleteOrthanc(jobId: number): Observable<EvalJobViewModel> {
+    return this.http.post<EvalJobViewModel>(`${this.baseUrl}/deleteOthanc`, {id: jobId})
+  }
+
   updateReplicas(id: number, replicas: number): Observable<{updated: number}> {
     return this.http.post<{updated: number}>(`${this.baseUrl}/replicas`, {id, replicas})
   }

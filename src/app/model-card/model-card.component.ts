@@ -22,6 +22,7 @@ export class ModelCardComponent implements OnInit {
   runningControl = new FormControl()
   cpuControl = new FormControl()
   modalityControl = new FormControl()
+  deleteOrthancControl = new FormControl()
   replicas = 0
   running = false
   modalities$ = this.studyService.getModalities()
@@ -36,6 +37,7 @@ export class ModelCardComponent implements OnInit {
     this.setupRunningToggle()
     this.setupCPUToggle()
     this.setupModalityControl()
+    this.setupDeleteOrthancToggle()
   }
 
   setupRunningToggle () {
@@ -48,6 +50,15 @@ export class ModelCardComponent implements OnInit {
     ).subscribe(v => {
       this.running = !this.running
       this.notificationService.showNotification('Successfully toggled model')
+    })
+  }
+
+  setupDeleteOrthancToggle() {
+    this.deleteOrthancControl.setValue(this.job.deleteOrthanc)
+    this.deleteOrthancControl.valueChanges.pipe(
+      switchMap( v => this.jobService.toggleDeleteOrthanc(this.job.id))
+    ).subscribe( v => {
+      this.notificationService.showNotification(`Toggled delete orthanc`)
     })
   }
 
